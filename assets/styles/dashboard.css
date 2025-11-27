@@ -1,12 +1,21 @@
-/* Sidebar styles */
+h1{
+    justify-self: center;
+}
+
 h5{
     cursor: default;
     user-select: none;
     justify-self: center;
 }
 
+/* Sidebar styles */
 #sidebar {
+    position: fixed;
+    top: 56px; /* height of your navbar */
+    left: 0;
     width: 250px;
+    height: calc(100vh - 56px); /* full height minus navbar */
+    overflow-y: auto; /* optional: scroll inside sidebar ONLY if content is long */
     transition: all 0.3s;
 }
 #sidebar.collapsed {
@@ -25,10 +34,32 @@ h5{
     font-weight: bold;
 }
 
+.navbar-brand {
+    justify-self: center;
+}
 .nav-link i {
     margin-right: 8px;
     font-size: 1.1rem;
 }
 .navbar {
     justify-content: left;
+}
+
+#myTable {
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}
+#dt-search-0 {
+    justify-self: right;
+    border: 1px solid #000000;
+    border-radius: 3px;
+}
+
+#myTable th,
+#myTable td {
+    border: 1px solid #000000;
+    padding: 8px;
+}
+#content-div {
+    font-family:Arial, Helvetica, sans-serif
 }
