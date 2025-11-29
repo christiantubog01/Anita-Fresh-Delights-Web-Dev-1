@@ -17,20 +17,14 @@
             </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.categoryName }}</td>
-                <td>{{ category.categoryDescription }}</td>
-                <td>{{ category.dateCreated ? category.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
+         {% for category in categories %}
+        <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.categoryName }}</td>
+            <td>{{ category.categoryDescription }}</td>
+            <td>{{ category.dateCreated|date('Y-m-d') }}</td>
+            <td><a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
+                <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a></td>
             </tr>
         {% endfor %}
         </tbody>

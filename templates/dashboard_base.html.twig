@@ -35,7 +35,11 @@
             Categories
             </a>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Stocks</a></li>
+            <li class="nav-item">
+            <a href="/stock" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_stock' %}active{% endif %}">
+            Stocks
+            </a>
+            </li>
         </ul>
     </div>
 

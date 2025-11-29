@@ -1,0 +1,41 @@
+{% extends 'dashboard_base.html.twig' %}
+
+{% block title %}Stock index{% endblock %}
+
+{% block body %}
+    <h1>Stock index</h1>
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Stock_description</th>
+                <th>Min_quantity</th>
+                <th>Max_quantity</th>
+                <th>Unit</th>
+                <th>Date_created</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.id }}</td>
+            <td>{{ stock.quantity }}</td>
+            <td>{{ stock.stockDescription }}</td>
+            <td>{{ stock.minQuantity }}</td>
+            <td>{{ stock.maxQuantity }}</td>
+            <td>{{ stock.unit }}</td>
+            <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
+            <td>
+                <a href="{{ path('app_stock_show', {'id': stock.id}) }}">show</a>
+                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stock_new') }}">Create new</a>
+{% endblock %}
