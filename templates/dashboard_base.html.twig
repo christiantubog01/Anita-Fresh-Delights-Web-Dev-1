@@ -29,7 +29,11 @@
             </a>
             </li>
             <li class="nav-item"><a href="#" class="nav-link text-white">Users</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Products</a></li>
+            <li class="nav-item">
+            <a href="/product" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_product' %}active{% endif %}">
+            Products
+            </a>
+            </li>
             <li class="nav-item">
             <a href="/category" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_category' %}active{% endif %}">
             Categories

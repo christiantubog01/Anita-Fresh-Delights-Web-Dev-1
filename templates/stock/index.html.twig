@@ -29,8 +29,8 @@
             <td>{{ stock.unit }}</td>
             <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
             <td>
-                <a href="{{ path('app_stock_show', {'id': stock.id}) }}">show</a>
-                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}">edit</a>
+                <a href="{{ path('app_stock_show', {'id': stock.id}) }}"class="btn btn-sm btn-primary">show</a>
+                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-sm btn-secondary">edit</a>
             </td>
         </tr>
         {% endfor %}
