@@ -25,7 +25,13 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productDescription }}</td>
-                <td>{{ product.image }}</td>
+                <td>
+                {% if product.image %}
+                                <img src="{{ asset('products/' ~ product.image) }}" alt="{{ product.ProductName }}" class="product-thumb">
+                            {% else %}
+                                <span class="no-image">No image</span>
+                            {% endif %}
+                </td>
                 <td>{{ product.price }}</td>
 
                 {# Category relation (change id to categoryName if you want to display category name)#}

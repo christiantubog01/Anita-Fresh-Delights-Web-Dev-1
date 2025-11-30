@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
@@ -17,7 +19,21 @@ class ProductType extends AbstractType
         $builder
             ->add('product_name')
             ->add('product_description')
-            ->add('image')
+            ->add('image', FileType::class, [
+                    'label' => 'Product Image (JPEG or PNG file)',
+                    'mapped' => false, // not directly linked to entity field
+                    'required' => $options['is_create'], // required only on create, change it to false or true to change back
+                    'constraints' => [
+                new File([
+                    'maxSize' => '2M',
+                    'mimeTypes' => [
+                    'image/jpeg',
+                    'image/png',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid JPEG or PNG image',
+                ]),
+                    ],
+                    ])
             ->add('price')
             ->add('date_created')
             ->add('category', EntityType::class, [
@@ -35,6 +51,7 @@ class ProductType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
+            'is_create' => false, // default is edit mode remove this to go back
         ]);
     }
 }
