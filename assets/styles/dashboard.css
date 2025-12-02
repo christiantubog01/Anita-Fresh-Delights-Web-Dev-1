@@ -7,6 +7,45 @@ h5{
     user-select: none;
     justify-self: center;
 }
+/* Nav bar */
+/* Navbar container */
+.dashboard-admin {
+    background: #00b012; /* dark gray alternative */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Toggle button */
+.dashboard-admin .toggle-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.dashboard-admin .toggle-btn:hover {
+    background: rgba(91, 91, 91, 0.1);
+}
+
+/* Title */
+.dashboard-admin .brand-title {
+    font-size: 20px;
+    margin-left: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
 
 /* Sidebar styles */
 #sidebar {
@@ -16,8 +55,26 @@ h5{
     width: 250px;
     height: calc(100vh - 56px); /* full height minus navbar */
     overflow-y: auto; /* optional: scroll inside sidebar ONLY if content is long */
-    transition: all 0.3s;
+    transition: none; /*put "none" for no animation "all 0.3s" for small animation*/
+    background-color: #003e2c;
 }
+
+#sidebar .sidebar-logo {
+    justify-self: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: white;
+    border-radius: 100%;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00ff22;
+}
+
+#sidebar .sidebar-logo img {
+    max-width: 120px; /* adjust size */
+    height: auto;
+}
+#sidebar .nav-item {
+    margin-bottom: 10px; /* adjust spacing */
+}
+
 #sidebar.collapsed {
     margin-left: -250px;
 }
@@ -28,12 +85,35 @@ h5{
     margin-left: 0;
 }
 
-/* Active menu item */
-.nav-link.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    font-weight: bold;
+#sidebar .nav-link {
+    color: #dcdcdc; /* light gray for normal state */
+    background-color: transparent;
+    border-radius: 10px;
+    
 }
 
+#sidebar .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+/* Active menu item */
+#sidebar .nav-link.active {
+    color: #ffffff; 
+    background-color: rgba(255, 255, 255, 0.2); 
+    font-weight: 600;
+    border-radius: 10px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00ff22;
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #ffffff;
+    font-weight: 600;
+}
+
+
+/* Nav stuff */
 .navbar-brand {
     justify-self: center;
 }
@@ -41,10 +121,15 @@ h5{
     margin-right: 8px;
     font-size: 1.1rem;
 }
+
 .navbar {
     justify-content: left;
 }
 
+
+
+
+/* datatables */
 #myTable {
     border: 1px solid #000000;
     border-collapse: collapse;
@@ -61,5 +146,108 @@ h5{
     padding: 8px;
 }
 #content-div {
-    font-family:Arial, Helvetica, sans-serif
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* Table wrapper */
+#myTable_wrapper {
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Table */
+#myTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f4fff4; /* very light green background */
+    color: #1a3a1a; /* dark green text */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Table headers */
+#myTable th {
+    background-color: #00b012; /* dashboard green */
+    color: #ffffff;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid #008000;
+}
+
+/* Table rows */
+#myTable td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #c1e1c1;
+}
+
+/* Row hover */
+#myTable tbody tr:hover {
+    background-color: rgba(0, 176, 18, 0.1); /* light green glow */
+}
+
+/* Alternate rows */
+#myTable tbody tr:nth-child(even) {
+    background-color: rgba(0, 176, 18, 0.05);
+}
+
+/* Buttons inside table */
+#myTable a.btn {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    margin-right: 4px;
+    color: #fff;
+}
+
+#myTable a.btn-primary {
+    background-color: #00b012;
+    border-color: #00a010;
+}
+
+#myTable a.btn-secondary {
+    background-color: #6c757d;
+    border-color: #5a6268;
+}
+
+/* Info text */
+#myTable_wrapper .dt-info {
+    color: #1a3a1a;
+}
+
+/* Search and length select */
+#myTable_wrapper input[type="search"],
+#myTable_wrapper select {
+    background-color: #e6ffe6;
+    color: #1a3a1a;
+    border: 1px solid #00b012;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+/* Pagination buttons */
+#myTable_wrapper .dt-paging {
+    display: flex;
+    justify-content: flex-end; /* move arrows to the right */
+    margin-top: 10px;
+    gap: 3px;
+}
+
+#myTable_wrapper .dt-paging-button {
+    background-color: #00b012;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+#myTable_wrapper .dt-paging-button.current {
+    background-color: #008000;
+    font-weight: bold;
+}
+
+#myTable_wrapper .dt-paging-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

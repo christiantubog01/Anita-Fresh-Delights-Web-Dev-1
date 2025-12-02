@@ -9,47 +9,69 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
+    
 </head>
 
 <body>
 
+{# Navbar (commented out old version) #}
+{# 
 <nav class="navbar navbar-dark bg-dark px-3">
     <button class="btn btn-outline-light" id="toggleSidebar">☰</button>
     <span class="navbar-brand ms-3">My Admin Dashboard</span>
 </nav>
+#}
+
+<nav class="dashboard-admin">
+    <button class="toggle-btn" id="toggleSidebar">☰</button>
+    <span class="brand-title">My Admin Dashboard</span>
+</nav>
 
 <div class="d-flex">
 
-    <div id="sidebar" class="bg-secondary text-white vh-100 p-3">
+    <!-- Sidebar -->
+    <div id="sidebar" class="text-white vh-100 p-3">
+        <div class="sidebar-logo text-center mb-3">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid" />
+        </div>
+
         <h5 class="text-light">Menu</h5>
         <ul class="nav flex-column">
             <li class="nav-item">
-            <a href="/dashboard" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
-            Dashboard
-            </a>
+                <a href="{{ path('app_dashboard') }}"
+                   class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
+                    Dashboard
+                </a>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link text-white">Users</a></li>
+
             <li class="nav-item">
-            <a href="/product" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_product' %}active{% endif %}">
-            Products
-            </a>
+                <a href="{{ path('app_product_index') }}"
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_product' %}active{% endif %}">
+                    Products
+                </a>
             </li>
+
             <li class="nav-item">
-            <a href="/category" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_category' %}active{% endif %}">
-            Categories
-            </a>
+                <a href="{{ path('app_category_index') }}"
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_category' %}active{% endif %}">
+                    Categories
+                </a>
             </li>
+
             <li class="nav-item">
-            <a href="/stock" class="nav-link text-white {% if app.request.attributes.get('_route') == 'app_stock' %}active{% endif %}">
-            Stocks
-            </a>
+                <a href="{{ path('app_stock_index') }}"
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_stock' %}active{% endif %}">
+                    Stocks
+                </a>
             </li>
         </ul>
     </div>
 
+    <!-- Main content -->
     <div id="content" class="flex-grow-1 p-4">
         {% block body %}{% endblock %}
     </div>
+
 </div>
 
 {% block javascripts %}

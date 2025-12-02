@@ -1,8 +1,6 @@
 import 'bootstrap';
 import './styles/app.css';
 import './styles/dashboard.css';
-
-// ✅ DataTables imports
 import DataTable from 'datatables.net-dt';
 
 // Sidebar toggle with state persistence

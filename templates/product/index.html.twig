@@ -3,12 +3,13 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+
+    <h1>Products</h1>
 
     <table id="myTable" class="display nowrap" style="width:100%">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Product Name</th>
             <th>Product Description</th>
             <th>Image</th>
@@ -44,8 +45,8 @@
                 <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
 
                 <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-primary">Show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-primary">➤ Show</a> 
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">✎ Edit</a>
                 </td>
             </tr>
         {% endfor %}

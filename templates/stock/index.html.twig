@@ -3,19 +3,19 @@
 {% block title %}Stock index{% endblock %}
 
 {% block body %}
-    <h1>Stock index</h1>
+    <h1>Stocks</h1>
 
     <table id="myTable" class="display">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Quantity</th>
-                <th>Stock_description</th>
-                <th>Min_quantity</th>
-                <th>Max_quantity</th>
+                <th>Stock Description</th>
+                <th>Min. quantity</th>
+                <th>Max. quantity</th>
                 <th>Unit</th>
-                <th>Date_created</th>
-                <th>actions</th>
+                <th>Date Created</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
             <td>{{ stock.unit }}</td>
             <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
             <td>
-                <a href="{{ path('app_stock_show', {'id': stock.id}) }}"class="btn btn-sm btn-primary">show</a>
-                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-sm btn-secondary">edit</a>
+                <a href="{{ path('app_stock_show', {'id': stock.id}) }}"class="btn btn-sm btn-primary">➤ Show</a>
+                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-sm btn-secondary">✎ Edit</a>
             </td>
         </tr>
         {% endfor %}
