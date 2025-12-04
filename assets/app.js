@@ -3,6 +3,8 @@ import './styles/app.css';
 import './styles/dashboard.css';
 import DataTable from 'datatables.net-dt';
 
+
+
 // Sidebar toggle with state persistence
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById("toggleSidebar");
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener("click", () => {
             sidebar.classList.toggle("collapsed");
             localStorage.setItem('sidebar-collapsed', sidebar.classList.contains('collapsed'));
+            
         });
     }
 
@@ -27,3 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
         new DataTable('#myTable');
     }
 });
+
+

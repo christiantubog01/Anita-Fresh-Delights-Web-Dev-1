@@ -33,7 +33,7 @@
                                 <span class="no-image">No image</span>
                             {% endif %}
                 </td>
-                <td>{{ product.price }}</td>
+                <td>₱{{ product.price }} </td>
 
                 {# Category relation (change id to categoryName if you want to display category name)#}
                 <td>{{ product.category ? product.category.id : '' }}</td> 
@@ -47,11 +47,13 @@
                 <td>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-primary">➤ Show</a> 
                     <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">✎ Edit</a>
+                    {{ include('product/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
-
+    <div class="create-btn">
     <a href="{{ path('app_product_new') }}">Create new</a>
+    </div>
 {% endblock %}

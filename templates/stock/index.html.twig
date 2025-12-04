@@ -3,23 +3,24 @@
 {% block title %}Stock index{% endblock %}
 
 {% block body %}
-    <h1>Stocks</h1>
+<h1>Stocks</h1>
 
-    <table id="myTable" class="display">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Quantity</th>
-                <th>Stock Description</th>
-                <th>Min. quantity</th>
-                <th>Max. quantity</th>
-                <th>Unit</th>
-                <th>Date Created</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for stock in stocks %}
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Quantity</th>
+            <th>Stock Description</th>
+            <th>Min. quantity</th>
+            <th>Max. quantity</th>
+            <th>Unit</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for stock in stocks %}
         <tr>
             <td>{{ stock.id }}</td>
             <td>{{ stock.quantity }}</td>
@@ -28,14 +29,21 @@
             <td>{{ stock.maxQuantity }}</td>
             <td>{{ stock.unit }}</td>
             <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
+
             <td>
-                <a href="{{ path('app_stock_show', {'id': stock.id}) }}"class="btn btn-sm btn-primary">➤ Show</a>
-                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-sm btn-secondary">✎ Edit</a>
+                <a href="{{ path('app_stock_show', {'id': stock.id}) }}"
+                   class="btn btn-sm btn-primary">➤ Show</a>
+
+                <a href="{{ path('app_stock_edit', {'id': stock.id}) }}"
+                   class="btn btn-sm btn-secondary">✎ Edit</a>
+                {{ include('stock/_delete_form.html.twig') }}
             </td>
         </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% endfor %}
+    </tbody>
+</table>
 
+    <div class="create-btn">
     <a href="{{ path('app_stock_new') }}">Create new</a>
+    </div>
 {% endblock %}

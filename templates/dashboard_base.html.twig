@@ -24,7 +24,7 @@
 
 <nav class="dashboard-admin">
     <button class="toggle-btn" id="toggleSidebar">☰</button>
-    <span class="brand-title">My Admin Dashboard</span>
+    <span class="brand-title">Dashboard</span>
 </nav>
 
 <div class="d-flex">
@@ -36,32 +36,33 @@
         </div>
 
         <h5 class="text-light">Menu</h5>
+
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="{{ path('app_dashboard') }}"
                    class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
-                    Dashboard
+                    🏠︎ Dashboard
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="{{ path('app_product_index') }}"
                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_product' %}active{% endif %}">
-                    Products
+                   ⌸ Products
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="{{ path('app_category_index') }}"
                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_category' %}active{% endif %}">
-                    Categories
+                   ⵌ Categories
                 </a>
             </li>
 
             <li class="nav-item">
                 <a href="{{ path('app_stock_index') }}"
                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_stock' %}active{% endif %}">
-                    Stocks
+                   ⍠ Stocks
                 </a>
             </li>
         </ul>
