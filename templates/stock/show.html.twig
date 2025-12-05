@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Stock</h1>
 
+<div class="content-box">
+
     <table class="table">
         <tbody>
             <tr>
@@ -37,10 +39,12 @@
             </tr>
         </tbody>
     </table>
+    <div class="actions">
+    <a  class="btn btn-secondary" href="{{ path('app_stock_index') }}">🡰 Back</a>
 
-    <a href="{{ path('app_stock_index') }}">back to list</a>
-
-    <a href="{{ path('app_stock_edit', {'id': stock.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('app_stock_edit', {'id': stock.id}) }}">✎ Edit</a>
 
     {{ include('stock/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}

@@ -3,40 +3,49 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+<h1>Product</h1>
+
+<div class="content-box">
 
     <table class="table">
         <tbody>
+            <tr>
+                <th>Image</th>
+                <td> {% if product.image %}
+            <img src="{{ asset('products/' ~ product.image) }}" alt="{{ product.ProductName }}" class="product-thumb">
+        {% else %}
+            <em>No image uploaded</em>
+        {% endif %}</td>
+            </tr>
             <tr>
                 <th>Id</th>
                 <td>{{ product.id }}</td>
             </tr>
             <tr>
-                <th>Product_name</th>
+                <th>Product Name</th>
                 <td>{{ product.productName }}</td>
             </tr>
             <tr>
-                <th>Product_description</th>
+                <th>Description</th>
                 <td>{{ product.productDescription }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ product.image }}</td>
-            </tr>
-            <tr>
                 <th>Price</th>
-                <td>{{ product.price }}</td>
+                <td>₱{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Date_created</th>
+                <th>Date Created</th>
                 <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_product_index') }}">back to list</a>
+    <div class="actions">
+        <a class="btn btn-secondary" href="{{ path('app_product_index') }}">🡰 Back</a>
+        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">✎ Edit</a>
+        {{ include('product/_delete_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+</div>
 
-    {{ include('product/_delete_form.html.twig') }}
 {% endblock %}

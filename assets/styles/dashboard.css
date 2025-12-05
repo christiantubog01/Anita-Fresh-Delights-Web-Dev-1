@@ -68,7 +68,8 @@ h5{
     width: 250px;
     height: calc(100vh - 56px); /* full height minus navbar */
     overflow-y: auto; /* optional: scroll inside sidebar ONLY if content is long */
-    transition: all 0.3s; /*put "none" for no animation "all 0.3s" for small animation*/
+    transition: none; 
+    /* put "none" for no animation "all 0.3s" for small animation */
     background-color: #003e2c;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
 }
@@ -114,6 +115,7 @@ h5{
 
 #sidebar.collapsed {
     margin-left: -250px;
+     opacity: 0;
 }
 #content {
     transition: all 0.3s;
@@ -319,4 +321,114 @@ h5{
     background-color: #1e7e34;
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+}
+
+/* For SHOW */
+
+.content-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 850px;
+    margin: 20px auto; /* centers the box */
+    border: 1px solid #e5e5e5;
+}
+
+.content-box h1 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.content-box table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-box th {
+    width: 180px;
+    padding: 10px 0;
+    font-weight: 600;
+    color: #555;
+}
+
+.content-box td {
+    padding: 10px 0;
+    color: #333;
+}
+
+.product-thumb {
+    width: 140px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+.content-box {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* For EDIT */
+
+.edit-card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 30px auto;
+    border: 1px solid #d1d1d1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.edit-card h1 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.edit-card .actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+.edit-card input,
+.edit-card select,
+.edit-card textarea {
+    border: 2px solid #ccc;      /* thicker border */
+    border-radius: 6px;          /* rounded corners */
+    padding: 10px 12px;          /* spacing inside */
+    font-size: 16px;             /* readable text */
+    width: 100%;                 /* full width */
+    transition: border-color 0.3s, box-shadow 0.3s; /* smooth focus effect */
+    box-sizing: border-box;      /* include padding in width */
+}
+
+.edit-card input:focus,
+.edit-card select:focus,
+.edit-card textarea:focus {
+    border-color: #00b012;       /* highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 176, 18, 0.4);
 }
