@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\NumberType; 
 
 class ProductType extends AbstractType
 {
@@ -34,8 +35,18 @@ class ProductType extends AbstractType
                 ]),
                     ],
                     ])
-            ->add('price')
-            ->add('date_created')
+            ->add('price', NumberType::class, [
+                'scale' => 2,        // keep two decimals
+                'html5' => true,     // renders <input type="number">
+                'required' => true,
+                'attr' => [
+                    'min' => '0',
+                    'step' => '0.01',
+                    'inputmode' => 'decimal',
+                    'pattern' => '\d+(\.\d{1,2})?' 
+                ],
+            ])
+            // ->add('date_created')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'id',

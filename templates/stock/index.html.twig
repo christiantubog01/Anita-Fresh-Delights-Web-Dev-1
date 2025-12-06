@@ -3,7 +3,7 @@
 {% block title %}Stock index{% endblock %}
 
 {% block body %}
-<h1>Stocks</h1>
+<h1>STOCKS</h1>
 
 <table id="myTable" class="display">
     <thead>
@@ -21,13 +21,58 @@
 
     <tbody>
     {% for stock in stocks %}
+        {% set isBelowMin = stock.quantity < stock.minQuantity %}
+        {% set isAboveMax = stock.quantity > stock.maxQuantity %}
+
         <tr>
             <td>{{ stock.id }}</td>
-            <td>{{ stock.quantity }}</td>
+
+            {# QUANTITY COLUMN #}
+            <td>
+            <div class="qty-wrapper">
+            <div class="stock-qty">
+                {% if isBelowMin %}
+                    <span class="highlight-quantity">
+                        {{ stock.quantity }} (At Minimum Quantity)
+                    </span>
+                {% elseif isAboveMax %}
+                    <span class="highlight-quantity">
+                        {{ stock.quantity }} (At Max Quantity)
+                    </span>
+                {% else %}
+                    {{ stock.quantity }}
+                {% endif %}
+            </div>
+            </div>
+            </td>
+
             <td>{{ stock.stockDescription }}</td>
-            <td>{{ stock.minQuantity }}</td>
-            <td>{{ stock.maxQuantity }}</td>
-            <td>{{ stock.unit }}</td>
+
+            {# MIN QUANTITY COLUMN #}
+            <td>
+                {% if isBelowMin %}
+                    <span class="highlight-quantity">{{ stock.minQuantity }}</span>
+                {% else %}
+                    {{ stock.minQuantity }}
+                {% endif %}
+            </td>
+
+            {# MAX QUANTITY COLUMN #}
+            <td>
+                {% if isAboveMax %}
+                    <span class="highlight-quantity">{{ stock.maxQuantity }}</span>
+                {% else %}
+                    {{ stock.maxQuantity }}
+                {% endif %}
+            </td>
+
+            <td>
+            <div class="qty-wrapper">
+            <div class="stock-unit">
+            {{ stock.unit }}
+            </div>
+            </div>
+            </td>
             <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
 
             <td>
@@ -43,7 +88,7 @@
     </tbody>
 </table>
 
-    <div class="create-btn">
+<div class="create-btn">
     <a href="{{ path('app_stock_new') }}">Create new</a>
-    </div>
+</div>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>CATEGORIES</h1>
 
     <table id="myTable" class="display">
         <thead>
@@ -19,7 +19,13 @@
          {% for category in categories %}
         <tr>
             <td>{{ category.id }}</td>
-            <td>{{ category.categoryName }}</td>
+            <td>
+            <div class="category-wrapper">
+            <div class="category-name">
+            {{ category.categoryName }}
+            </div>
+            </div>
+            </td>
             <td>{{ category.categoryDescription }}</td>
             <td>{{ category.dateCreated|date('Y-m-d') }}</td>
             <td>

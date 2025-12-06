@@ -242,16 +242,17 @@ h5{
 #myTable a.btn-primary {
     background-color: #0400ff;
 }
+#myTable a.btn-primary:hover {
+    background-color: #0300be;
+}
 
 #myTable a.btn-secondary {
     background-color: #009a1a;
 }
 
-
-
-
-
-
+#myTable a.btn-secondary:hover {
+    background-color: #007614;
+}
 
 /* Info text */
 #myTable_wrapper .dt-info {
@@ -433,4 +434,54 @@ h5{
     box-shadow: 0 0 5px rgba(0, 176, 18, 0.4);
 }
 
+/* STOCKS QUANTITY */
+.out-of-range {
+    color: red;
+    font-weight: bold;
+}
+.highlight-quantity {
+    color: red;
+    font-weight: bold;
+}
 
+
+/* CATEGORY DESIGN */
+.category-wrapper {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.category-id {
+    color: white;
+    background-color: rgb(255, 0, 68);
+    padding: 3px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.category-name {
+    background-color: rgb(255, 166, 0);
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.qty-wrapper{
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.stock-qty{
+    color: white;
+    background-color: rgb(170, 170, 170);
+    padding: 3px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.stock-unit{
+    background-color: rgb(0, 77, 116);
+    padding: 3px 6px;
+    border-radius: 4px;
+}

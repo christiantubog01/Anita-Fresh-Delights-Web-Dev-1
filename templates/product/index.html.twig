@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>Products</h1>
+    <h1>PRODUCTS</h1>
 
     <table id="myTable" class="display nowrap" style="width:100%">
     <thead>
@@ -36,11 +36,23 @@
                 <td>₱{{ product.price }} </td>
 
                 {# Category relation (change id to categoryName if you want to display category name)#}
-                <td>{{ product.category ? product.category.id : '' }}</td> 
-                
+                <td>
+    {% if product.category %}
+        <div class="category-wrapper">
+            <div class="category-id">{{ product.category.id }}</div>
+            <div class="category-name">{{ product.category.categoryName }}</div>
+        </div>
+    {% else %}
+        No Category
+    {% endif %}
+</td>
 
-                {# Stock relation (assuming OneToOne or ManyToOne) #}
-                <td>{{ product.stock ? product.stock.quantity ~ ' ' ~ product.stock.unit : '' }}</td>
+                <td>
+                <div class="qty-wrapper">
+                <div class="stock-qty">{{ product.stock ? product.stock.quantity}}</div>
+                    <div class="stock-unit">{{ product.stock.unit }}</div>
+                </div>
+                </td>
 
                 <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
 
