@@ -207,7 +207,7 @@ h5{
 
 /* Table headers */
 #myTable th {
-    background-color: #525252; /* dashboard green */
+    background-color: #525252; 
     color: #ffffff;
     padding: 10px 12px;
     text-align: left;
@@ -216,10 +216,10 @@ h5{
 
 /* Table rows */
 #myTable td {
-
     padding: 10px 12px;
     border-bottom: 1px solid #747474;
 }
+
 
 /* Row hover */
 #myTable tbody tr:hover {
@@ -383,7 +383,7 @@ h5{
     }
 }
 
-/* For EDIT */
+/* For EDIT EXTRA IMPORTANT!!! YOU USED THIS IN YOUR CREATE CRUD FUCTION */
 
 .edit-card {
     background: #f9f9f9;
@@ -432,3 +432,5 @@ h5{
     outline: none;
     box-shadow: 0 0 5px rgba(0, 176, 18, 0.4);
 }
+
+

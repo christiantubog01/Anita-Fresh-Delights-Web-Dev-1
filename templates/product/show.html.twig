@@ -18,23 +18,23 @@
         {% endif %}</td>
             </tr>
             <tr>
-                <th>Id</th>
+                <th>ID:</th>
                 <td>{{ product.id }}</td>
             </tr>
             <tr>
-                <th>Product Name</th>
+                <th>Product Name:</th>
                 <td>{{ product.productName }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Description:</th>
                 <td>{{ product.productDescription }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Price:</th>
                 <td>₱{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Date Created</th>
+                <th>Date Created:</th>
                 <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>

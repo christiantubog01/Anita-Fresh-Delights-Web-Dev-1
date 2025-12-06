@@ -5,7 +5,12 @@
 {% block body %}
     <h1>Create new Category</h1>
 
+    <div class="edit-card">
+
     {{ include('category/_form.html.twig') }}
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+    <div class="actions">
+    <a href="{{ path('app_category_index') }}" class="btn btn-secondary">🡰 Back</a>
+    </div>
+    </div>
 {% endblock %}
