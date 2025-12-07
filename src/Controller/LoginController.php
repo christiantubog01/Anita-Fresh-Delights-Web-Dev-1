@@ -10,19 +10,34 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('target_path');
+public function login(AuthenticationUtils $authenticationUtils): Response
+{
+    // If already logged in → redirect based on role
+    if ($this->getUser()) {
+        $roles = $this->getUser()->getRoles();
+
+        if (in_array('ROLE_ADMIN', $roles)) {
+            return $this->redirectToRoute('app_dashboard'); // replace with your admin route
         }
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        if (in_array('ROLE_STAFF', $roles)) {
+            return $this->redirectToRoute('app_dashboard'); // replace with your staff route
+        }
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        // Default: regular user
+        return $this->redirectToRoute('app_home'); // replace with your user home
     }
+
+    // get login error if there is one
+    $error = $authenticationUtils->getLastAuthenticationError();
+    // last username entered by the user
+    $lastUsername = $authenticationUtils->getLastUsername();
+
+    return $this->render('security/login.html.twig', [
+        'last_username' => $lastUsername,
+        'error' => $error
+    ]);
+}
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
