@@ -172,4 +172,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __construct()
+    {
+        // Auto-set created date
+        $this->date_time_created = new \DateTime();
+    }
 }
