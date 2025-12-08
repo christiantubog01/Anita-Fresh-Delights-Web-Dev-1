@@ -3,17 +3,75 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
 
-    {{ form_errors(registrationForm) }}
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg flex flex-col">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <h2 class="text-2xl font-bold text-center mb-6">Create an Account</h2>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm, { attr: { class: 'flex-grow flex flex-col' } }) }}
+
+        {% if form_errors(registrationForm) %}
+            <div class="bg-red-100 text-red-700 text-sm p-3 rounded mb-4">
+                {{ form_errors(registrationForm) }}
+            </div>
+        {% endif %}
+
+                {# Username #}
+        <div class="mb-4">
+            {{ form_row(registrationForm.username, {
+                attr: { class: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' }
+            }) }}
+        </div>
+
+                {# Password #}
+        <div class="mb-4">
+            {{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            attr: { class: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' }
+            }) }}
+        </div>
+
+
+        {# First Name & Last Name side by side on medium+ screens #}
+        <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {{ form_row(registrationForm.first_name, {
+                attr: { class: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' }
+            }) }}
+            {{ form_row(registrationForm.last_name, {
+                attr: { class: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' }
+            }) }}
+        </div>
+
+        {# Birth Date #}
+        <div class="mb-4">
+            {{ form_row(registrationForm.birth_date, {
+                attr: { class: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500' }
+            }) }}
+        </div>
+
+        {# Terms Checkbox #}
+        <div class="mb-6 flex items-center gap-2">
+            {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'h-4 w-4' } }) }}
+            {{ form_label(registrationForm.agreeTerms, null, { label_attr: { class: 'text-sm' } }) }}
+        </div>
+
+        {# Register Button #}
+        <div class="mt-auto">
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition">
+                Register
+            </button>
+        </div>
+
+        {{ form_end(registrationForm) }}
+
+        {# Already have account link #}
+        <p class="text-center text-sm text-gray-600 mt-4">
+            Already have an account?
+            <a href="{{ path('app_login') }}" class="text-blue-600 hover:underline">Sign in</a>
+        </p>
+
+    </div>
+
+</div>
 {% endblock %}
