@@ -34,7 +34,7 @@ class RegistrationFormType extends AbstractType
             ->add('username')
             ->add('birth_date', DateType::class, [
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,

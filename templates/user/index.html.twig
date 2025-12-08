@@ -1,0 +1,72 @@
+{% extends 'dashboard_base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<h1>Users</h1>
+
+<table id="myTable" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birth Date</th>
+            <th>Date & Time Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>
+    {% for role in user.roles %}
+        {% if role == 'ROLE_ADMIN' %}
+            <span style="background:red; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                ADMIN
+            </span>
+
+        {% elseif role == 'ROLE_STAFF' %}
+            <span style="background:purple; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                STAFF
+            </span>
+
+        {% elseif role == 'ROLE_USER' %}
+            <span style="background:blue; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                USER
+            </span>
+        {% endif %}
+    {% endfor %}
+            </td>
+            <td>{{ (user.password|slice(0, 5) ~ '...') }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
+            <td>{{ user.dateTimeCreated ? user.dateTimeCreated|date('Y-m-d H:i:s') : '' }}</td>
+            <td>
+                <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                   class="btn btn-sm btn-primary">➤ Show</a>
+
+                <a href="{{ path('app_user_edit', {'id': user.id}) }}"
+                   class="btn btn-sm btn-secondary">✎ Edit</a>
+
+                {{ include('user/_delete_form.html.twig') }}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="create-btn mt-3">
+    <a href="{{ path('app_user_new') }}" class="btn btn-success">➕ Create new</a>
+</div>
+{% endblock %}
