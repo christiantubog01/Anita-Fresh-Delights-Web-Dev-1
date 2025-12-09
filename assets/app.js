@@ -1,6 +1,7 @@
 import 'bootstrap';
 import './styles/app.css';
 import './styles/dashboard.css';
+
 import DataTable from 'datatables.net-dt';
 
 // Reusable function

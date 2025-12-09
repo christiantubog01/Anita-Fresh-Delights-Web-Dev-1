@@ -16,6 +16,9 @@
 <nav class="dashboard-admin">
     <button class="toggle-btn" id="toggleSidebar">☰</button>
     <span class="brand-title">Dashboard</span>
+        <div class="user-actions">
+    <a href="{{ path('app_logout') }}" class="logout-btn">Logout</a>
+        </div>
 </nav>
 
 <div class="d-flex">
@@ -31,18 +34,19 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="{{ path('app_dashboard') }}"
-                   class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_dashboard' %}active{% endif %}">
                     🏠︎ Dashboard
                 </a>
             </li>
 
-                        <li class="nav-item">
+        {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item">
                 <a href="{{ path('app_user_index') }}"
-                   class="nav-link {% if app.request.attributes.get('_route') == 'app_user' %}active{% endif %}">
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_user' %}active{% endif %}">
                     ⍜ Users
                 </a>
             </li>
-
+        {% endif %}
             <li class="nav-item">
                 <a href="{{ path('app_product_index') }}"
                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_product' %}active{% endif %}">
@@ -64,6 +68,7 @@
                 </a>
             </li>
         </ul>
+        
     </div>
 
     <!-- Main content -->

@@ -45,6 +45,7 @@ h5{
     color: #ffffff;
     letter-spacing: 0.5px;
 }
+
 .dashboard-bg {
     background-size: cover;
     background-position: center;
@@ -59,6 +60,30 @@ h5{
     z-index: 0
 }
 
+.dashboard-admin .user-actions {
+    margin-left: auto; /* pushes to the right */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn {
+    color: #fff;
+    background-color: #dc3545;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.logout-btn:hover {
+    background-color: #b02a37;
+}
+
+
+
+
+
+
 
 /* Sidebar styles */
 #sidebar {
@@ -72,6 +97,7 @@ h5{
     /* put "none" for no animation "all 0.3s" for small animation */
     background-color: #003e2c;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    z-index: 500; /* high enough */
 }
 
 #sidebar .sidebar-logo {
@@ -112,7 +138,7 @@ h5{
 #sidebar .nav-item:nth-child(3) { animation-delay: 0.3s; }
 #sidebar .nav-item:nth-child(4) { animation-delay: 0.4s; }
 #sidebar .nav-item:nth-child(5) { animation-delay: 0.5s; }
-/* add more as needed */
+
 
 #sidebar.collapsed {
     margin-left: -250px;
@@ -486,3 +512,179 @@ h5{
     padding: 3px 6px;
     border-radius: 4px;
 }
+
+
+/* Wrapper for all dashboard cards */
+#dashboard-content {
+    padding: 20px;
+    min-height: calc(100vh - 60px); /* subtract navbar height */
+    transition: margin-left 0.3s;
+}
+
+/* Adjust for collapsed sidebar */
+/* #sidebar.collapsed + #dashboard-content {
+    margin-left: 0;
+} */
+
+/* Cards wrapper */
+.dashboard-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* center all cards */
+}
+
+/* Base card */
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 25px;
+    flex: 1 1 200px;
+    min-width: 200px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Welcome card */
+.dashboard-card.welcome-card {
+    background-color: #00159c;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+}
+
+/* Stats cards */
+.dashboard-card.stat-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.dashboard-card.stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Icons */
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Products per Category cards */
+.category-product-card {
+    background-color: #f0f4f8;   /* light background to differentiate */
+    color: #101010;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 20px;
+    flex: 1 1 200px;             /* responsive sizing */
+    min-width: 180px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Add a slight hover effect for these cards */
+.category-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Category title */
+.category-product-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Product count number */
+.category-product-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; /* you can choose a color per category if you want */
+}
+
+/* Reuse fade-in animation from main cards */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Center the wrapper for multiple category cards */
+.dashboard-cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* keeps cards centered */
+}
+
+.products-category-card {
+    margin-top: 40px;           /* spacing from main stats cards */
+    padding: 20px;              /* inner spacing around category cards */
+    background-color: #ffffff;  /* light gray background to separate section */
+    border-radius: 12px;        /* rounded corners */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* subtle shadow */
+}
+
+.products-category-card h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+
+/* Individual card colors for numbers & icons */
+.products-card .stat-icon, .products-card p { color: #007bff; }
+.stocks-card .stat-icon, .stocks-card p { color: #6f42c1; }
+.categories-card .stat-icon, .categories-card p { color: #fd7e14; }
+.users-card .stat-icon, .users-card p { color: #dc3545; }
+
+.dashboard-banner {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease forwards;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dashboard-banner img {
+    width: 100%;
+    height: 275px; /* adjust banner height */
+    object-fit: cover; /* crops image nicely */
+    display: block;
+}
+
+.dashboard-banner .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.dashboard-banner a:hover .banner-text {
+    background-color: rgba(0,0,0,0.6);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+

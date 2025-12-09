@@ -1,8 +1,61 @@
 {% extends 'dashboard_base.html.twig' %}
 
-{% block title %}Dashboard Home{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Dashboard</h1>
-<p>This is your admin panel.</p>
+    <div class="dashboard-card welcome-card">
+        <h2>Welcome, {{ app.user.firstName ~ " " ~ app.user.lastName}}!</h2>
+    </div>
+
+    <!-- Banner after Welcome Card -->
+<div class="dashboard-banner">
+    <a href="{{ path('app_home') }}">
+        <img src="{{ asset('images/filipino-food-banner.jpg') }}" alt="Visit Home Page Banner">
+        <span class="banner-text">🏠︎ Visit Home Page</span>
+    </a>
+</div>
+
+<div id="dashboard-content">
+
+    <!-- Main Stats Cards -->
+    <div class="dashboard-cards-wrapper">
+        <div class="dashboard-card stat-card products-card">
+            <div class="stat-icon">⌸</div>
+            <h3>Products</h3>
+            <p>{{ productCount }}</p>
+        </div>
+
+        <div class="dashboard-card stat-card stocks-card">
+            <div class="stat-icon">⍠</div>
+            <h3>Stocks</h3>
+            <p>{{ stockCount }}</p>
+        </div>
+
+        <div class="dashboard-card stat-card categories-card">
+            <div class="stat-icon">ⵌ</div>
+            <h3>Categories</h3>
+            <p>{{ categoryCount }}</p>
+        </div>
+
+        <div class="dashboard-card stat-card users-card">
+            <div class="stat-icon">⍜</div>
+            <h3>Users</h3>
+            <p>{{ userCount }}</p>
+        </div>
+    </div>
+
+    <!-- Products per Category -->
+    <div class="products-category-card">
+    <h3 style="margin-top:40px; text-align:center;">Products by Category</h3>
+    <div class="dashboard-cards-wrapper">
+        {% for category in categories %}
+            <div class="dashboard-card stat-card category-product-card">
+                <h4>{{ category.categoryName }}</h4>
+                <p>{{ category.products|length }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+
+</div>
 {% endblock %}
