@@ -1,20 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="home-page">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Code/XAMPP/htdocs/anita_fresh_delights/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Code/XAMPP/htdocs/anita_fresh_delights/templates/home/index.html.twig</code></li>
-    </ul>
+    <!-- Banner -->
+    <div class="home-banner">
+        <img src="/images/filipino-food-banner.jpg" alt="Banner" class="home-banner-img">
+        <div class="home-banner-text">
+            <h1 class="home-banner-title">WELCOME TO ANITA'S FRESH DELIGHTS!</h1>
+            <p class="home-banner-slogan">Freshly wrapped, lovingly served.</p>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="home-content-box">
+        <h2>WHY CHOOSE US?</h2>
+        <ul>
+            <li>Authentic and fresh Filipino food, made daily.</li>
+            <li>Traditional flavors with a modern twist.</li>
+            <li>Perfect for families, gatherings, and celebrations.</li>
+        </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="home-services">
+        <h2>SERVICES WE PROVIDE</h2>
+
+        <div class="home-services-container">
+
+            <div class="home-service-box">
+                <h3>FOODS</h3>
+                <p>Delicious Filipino dishes cooked fresh every day.</p>
+            </div>
+
+            <div class="home-service-box">
+                <h3>DRINKS</h3>
+                <p>Refreshing beverages to pair with your meals.</p>
+            </div>
+
+            <div class="home-service-box">
+                <h3>DELIVERY</h3>
+                <p>Fast and reliable delivery right to your doorstep.</p>
+            </div>
+
+        </div>
+    </div>
+
 </div>
+
 {% endblock %}

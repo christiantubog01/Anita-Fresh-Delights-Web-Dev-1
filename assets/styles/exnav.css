@@ -1,8 +1,0 @@
-.user-greeting {
-    margin-left: auto;        /* push greeting to the right */
-    display: flex;
-    align-items: center;      /* vertically center text */
-    height: 100%;             /* ensures full navbar height */
-    font-weight: 600;
-    color: white;
-}

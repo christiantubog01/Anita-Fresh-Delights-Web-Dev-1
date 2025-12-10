@@ -1,0 +1,85 @@
+/* HOME PAGE BASE */
+.home-body {
+    background-color: white;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+}
+
+/* NAVIGATION BAR */
+.home-nav {
+    background-color: #95b808;
+    padding: 0.5em 0;
+    font-size: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.home-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+}
+
+.home-nav li {
+    display: inline;
+}
+
+.home-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+
+.home-nav a:hover { 
+    background: #444;
+}
+
+/* NAV LOGO */
+.home-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3em;
+  padding-left: 2em;
+}
+
+.home-logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* FOOTER */
+.home-footer {
+    background: #d5d5d5;
+    color: #000;
+    padding: 40px 20px 20px;
+    font-family: Calibri, sans-serif;
+}
+
+.home-footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.home-footer-section {
+    flex: 1 1 300px;
+}
+
+.home-footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    border-top: 1px solid #555;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #000;
+}

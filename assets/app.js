@@ -1,6 +1,8 @@
 import 'bootstrap';
 import './styles/app.css';
 import './styles/dashboard.css';
+import './styles/nav-user.css';
+import './styles/home.css';
 
 import DataTable from 'datatables.net-dt';
 

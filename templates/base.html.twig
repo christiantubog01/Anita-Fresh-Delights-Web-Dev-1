@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -13,7 +15,90 @@
         {% endblock %}
         
     </head>
-    <body>
+
+    <body class="home-body">
+
+        {# -------------------------------------- #}
+        {# HOME NAVIGATION BAR                   #}
+        {# -------------------------------------- #}
+
+<nav class="home-nav" style="width: 100%;">
+    <div class="home-nav-container" 
+         style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+
+        <!-- Logo -->
+        <div class="home-logo">
+            <img src="/images/logo.png" alt="Logo">
+        </div>
+
+        <!-- Menu -->
+        <ul style="display: flex; gap: 2em; margin: 0; padding: 0; list-style: none;">
+            <li><a href="{{ path('app_home') }}">HOME</a></li>
+            <li><a href="#">PRODUCTS</a></li>
+            <li><a href="#">CONTACTS</a></li>
+            <li><a href="#">ABOUT</a></li>
+        </ul>
+
+        <!-- User actions -->
+        <div class="user-actions" style="margin-left: auto; display: flex; gap: 10px;">
+            {% if app.user %}
+                <!-- Logout button -->
+                <a href="{{ path('app_logout') }}" 
+                   class="logout-btn"
+                   style="background:#444; padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
+                    Logout
+                </a>
+            {% else %}
+                <!-- Login button -->
+                <a href="{{ path('app_login') }}" 
+                   class="login-btn"
+                   style="background:#007bff; padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
+                    Login
+                </a>
+
+                <!-- Register button -->
+                <a href="{{ path('app_register') }}" 
+                   class="register-btn"
+                   style="background:#28a745; padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
+                    Register
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+
+
+
+
+        {# MAIN PAGE CONTENT #}
         {% block body %}{% endblock %}
+
+        {# -------------------------------------- #}
+        {# HOME FOOTER                             #}
+        {# -------------------------------------- #}
+
+        <footer class="home-footer">
+            <div class="home-footer-container">
+
+                <div class="home-footer-section">
+                    <h3>Anita's Fresh Delights</h3>
+                    <p>Authentic Filipino food made fresh every day.</p>
+                </div>
+
+                <div class="home-footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@anitasfreshdelights.com</p>
+                    <p>Phone: +63 912 345 6789</p>
+                    <p>Address: Zone 2, Candau-ay, Dumaguete City</p>
+                </div>
+
+            </div>
+
+            <div class="home-footer-bottom">
+                <p>&copy; 2025 Anita's Fresh Delights | All Rights Reserved</p>
+            </div>
+        </footer>
+
     </body>
 </html>
