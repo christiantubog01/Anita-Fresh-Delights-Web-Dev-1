@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\ActivityLogger;
 
 #[Route('/stock')]
 final class StockController extends AbstractController
@@ -69,13 +70,20 @@ final class StockController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_stock_delete', methods: ['POST'])]
-    public function delete(Request $request, Stock $stock, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$stock->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($stock);
-            $entityManager->flush();
-        }
+public function delete(Request $request, Stock $stock, EntityManagerInterface $entityManager, ActivityLogger $activityLogger): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$stock->getId(), $request->request->get('_token'))) {
 
-        return $this->redirectToRoute('app_stock_index', [], Response::HTTP_SEE_OTHER);
+        // Log BEFORE deletion
+        $activityLogger->log(
+            "DELETE",
+            "Stock deleted: " . $stock->getStockDescription() . " (ID: " . $stock->getId() . ", Unit: " . $stock->getUnit() . ")"
+        );
+
+        $entityManager->remove($stock);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('app_stock_index', [], Response::HTTP_SEE_OTHER);
+}
 }

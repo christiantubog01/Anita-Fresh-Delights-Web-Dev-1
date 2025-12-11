@@ -63,6 +63,79 @@
         {% endfor %}
 
     </div>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="activity-log">
+    <h3>Activity Log</h3>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Action</th>
+                <th>Target Data</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for log in activityLogs %}
+                <tr>
+                    <td>{{ log.id ?? '—' }}</td>
+                    <td>{{ log.userId ?? '—' }}</td>
+                    <td>{{ log.username ?? '—' }}</td>
+
+                    <!-- ROLE BADGE -->
+                    <td>
+                        {% set role = log.role ?? '' %}
+                        {% if role == 'ROLE_ADMIN' %}
+                            <span style="background:red; color:white; padding:3px 6px; border-radius:4px;">ADMIN</span>
+                        {% elseif role == 'ROLE_STAFF' %}
+                            <span style="background:purple; color:white; padding:3px 6px; border-radius:4px;">STAFF</span>
+                        {% elseif role == 'ROLE_USER' %}
+                            <span style="background:blue; color:white; padding:3px 6px; border-radius:4px;">USER</span>
+                        {% else %}
+                            <span style="background:gray; color:white; padding:3px 6px; border-radius:4px;">UNKNOWN</span>
+                        {% endif %}
+                    </td>
+
+                    <!-- ACTION BADGE -->
+                    <td>
+                        {% set action = log.action ?? '' %}
+                        {% if action == 'CREATE' %}
+                            <span style="background:green; color:white; padding:3px 6px; border-radius:4px;">CREATE</span>
+                        {% elseif action == 'DELETE' %}
+                            <span style="background:red; color:white; padding:3px 6px; border-radius:4px;">DELETE</span>
+                        {% elseif action == 'LOGIN' %}
+                            <span style="background:blue; color:white; padding:3px 6px; border-radius:4px;">LOGIN</span>
+                        {% elseif action == 'LOGOUT' %}
+                            <span style="background:gray; color:white; padding:3px 6px; border-radius:4px;">LOGOUT</span>
+                        {% elseif action == 'UPDATE' %}
+                            <span style="background:purple; color:white; padding:3px 6px; border-radius:4px;">UPDATE</span>
+                        {% elseif action == 'REGISTER' %}
+                            <span style="background:teal; color:white; padding:3px 6px; border-radius:4px;">REGISTER</span>
+                        {% else %}
+                            <span>{{ action }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ log.targetData ?? '—' }}</td>
+
+                    <td>{{ log.createdAt ? log.createdAt|date('Y-m-d H:i:s') : '—' }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" style="text-align:center; padding:10px;">
+                        No activity logs found
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
 </div>
 
 </div>

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\ActivityLogger;
 
 #[Route('/category')]
 final class CategoryController extends AbstractController
@@ -68,14 +69,24 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($category);
-            $entityManager->flush();
-        }
+ #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
+public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ActivityLogger $activityLogger): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
 
-        return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+
+
+        // Log BEFORE deletion
+        $activityLogger->log(
+            "DELETE",
+            "Category deleted: " . $category->getCategoryName() . " (ID: " . $category->getId() . " Category Description: " . $category->getCategoryDescription() . ")"
+        );
+
+        $entityManager->remove($category);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+}
+
 }

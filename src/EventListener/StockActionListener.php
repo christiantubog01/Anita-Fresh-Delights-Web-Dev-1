@@ -21,7 +21,7 @@ class StockActionListener
     {
         $this->activityLogger->log(
             "CREATE",
-            "Stock created: " . $stock->getStockDescription()
+            "Stock created: " . $stock->getStockDescription() . " (ID: " . $stock->getId() . ", Unit: " . $stock->getUnit() . ")"
         );
     }
 
@@ -29,15 +29,18 @@ class StockActionListener
     {
         $this->activityLogger->log(
             "UPDATE",
-            "Stock updated: " . $stock->getStockDescription()
+            "Stock updated: " . $stock->getStockDescription() . " (ID: " . $stock->getId() . ", Unit: " . $stock->getUnit() . ")"
         );
     }
 
     public function postRemove(Stock $stock, PostRemoveEventArgs $args): void
     {
-        $this->activityLogger->log(
-            "DELETE",
-            "Stock deleted: " . $stock->getStockDescription()
-        );
+        // $this->activityLogger->log(
+        //     "DELETE",
+        //     "Stock deleted: " . $stock->getStockDescription()
+        // );
+
+
+        // PLACEHOLDER BECAUSE CONTROLLER ALREADY HAS LOGGER IN DELETE
     }
 }

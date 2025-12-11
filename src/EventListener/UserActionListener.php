@@ -35,9 +35,7 @@ class UserActionListener
 
     public function postRemove(User $user, PostRemoveEventArgs $args): void
     {
-        $this->activityLogger->log(
-            "DELETE",
-            "User deleted: " . $user->getUsername() . " (ID: " . $user->getId() . ")"
-        );
+        
+        // PLACEHOLDER BECAUSE CONTROLLER ALREADY HAS LOGGER IN DELETE
     }
 }

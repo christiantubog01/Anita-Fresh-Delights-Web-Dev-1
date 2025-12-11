@@ -19,25 +19,31 @@ class ProductActionListener
 
     public function postPersist(Product $product, PostPersistEventArgs $args): void
     {
+        $stock = $product->getStock();
+        $stockId = $stock ? $stock->getId() : 'NULL';
         $this->activityLogger->log(
             "CREATE",
-            "Product created: " . $product->getProductName() . " (ID: " . $product->getId() . ")"
+            "Product created: " . $product->getProductName() . " (ID: " . $product->getId() . " Product Description:" . $product->getProductDescription() . " Image:" . $product->getImage() . " Price:" . $product->getPrice() . " Stock ID:" . $stockId .")"
         );
     }
 
     public function postUpdate(Product $product, PostUpdateEventArgs $args): void
     {
+        $stock = $product->getStock();
+        $stockId = $stock ? $stock->getId() : 'NULL';
         $this->activityLogger->log(
             "UPDATE",
-            "Product updated: " . $product->getProductName() . " (ID: " . $product->getId() . ")"
+            "Product updated: " . $product->getProductName() . " (ID: " . $product->getId() . " Product Description:" . $product->getProductDescription() . " Image:" . $product->getImage() . " Price:" . $product->getPrice() . " Stock ID:" . $stockId .")"
         );
     }
 
     public function postRemove(Product $product, PostRemoveEventArgs $args): void
     {
-        $this->activityLogger->log(
-            "DELETE",
-            "Product deleted: " . $product->getProductName() . " (ID: " . $product->getId() . ")"
-        );
+        // $this->activityLogger->log(
+        //     "DELETE",
+        //     "Product deleted: " . $product->getProductName() . " (ID: " . $product->getId() . ")"
+        // );
+
+         // PLACEHOLDER BECAUSE CONTROLLER ALREADY HAS LOGGER IN DELETE
     }
 }

@@ -21,7 +21,7 @@ class CategoryActionListener
     {
         $this->activityLogger->log(
             "CREATE",
-            "Category created: " . $category->getCategoryName()
+            "Category created: " . $category->getCategoryName() . " (ID: " . $category->getId() . " Category Description: " . $category->getCategoryDescription() . ")"
         );
     }
 
@@ -29,15 +29,17 @@ class CategoryActionListener
     {
         $this->activityLogger->log(
             "UPDATE",
-            "Category updated: " . $category->getCategoryName()
+            "Category updated: " . $category->getCategoryName() . " (ID: " . $category->getId() . " Category Description: " . $category->getCategoryDescription() . ")"
         );
     }
 
     public function postRemove(Category $category, PostRemoveEventArgs $args): void
     {
-        $this->activityLogger->log(
-            "DELETE",
-            "Category deleted: " . $category->getCategoryName()
-        );
+        // $this->activityLogger->log(
+        //     "DELETE",
+        //     "Category deleted: " . $category->getCategoryName()
+        // );
+
+        // PLACEHOLDER BECAUSE CONTROLLER ALREADY HAS LOGGER IN DELETE
     }
 }

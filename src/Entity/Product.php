@@ -127,4 +127,5 @@ class Product
     {
         $this->date_created = new \DateTime();
     }
+    
 }

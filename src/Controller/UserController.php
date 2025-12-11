@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Service\ActivityLogger;
 
 #[Route('/user')]
 final class UserController extends AbstractController
@@ -89,13 +90,22 @@ public function edit(
 }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
+public function delete(Request $request, User $user, EntityManagerInterface $entityManager, ActivityLogger $activityLogger): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        $roles = implode(', ', $user->getRoles());
+        // Log before deletion
+        $activityLogger->log(
+            "DELETE",
+            "User deleted: " . $user->getUsername() . " (ID: " . $user->getId() . ", Roles: " . $roles . ")"
+        );
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($user);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+}
+
+
 }

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Service\ActivityLogger;
 
 #[Route('/product')]
 final class ProductController extends AbstractController
@@ -111,14 +112,31 @@ final class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($product);
-            $entityManager->flush();
-        }
+#[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
+public function delete(Request $request, Product $product, EntityManagerInterface $entityManager, ActivityLogger $activityLogger): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
-    }
+    // Get IDs instead of objects
+    $categoryId = $product->getCategory() ? $product->getCategory()->getId() : 'No Category';
+    $stockId = $product->getStock() ? $product->getStock()->getId() : 'No Stock';
+
+    // Log BEFORE deletion
+    $activityLogger->log(
+        "DELETE",
+        "Product deleted: " . $product->getProductName() . 
+        " (ID: " . $product->getId() . 
+        ", Category ID: " . $categoryId . 
+        ", Price: " . $product->getPrice() .
+        ", Stock ID: " . $stockId . ")"
+    );
+
+    $entityManager->remove($product);
+    $entityManager->flush();
+}
+
+    return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+}
+
+
 }
