@@ -15,9 +15,32 @@ services:
             - { name: 'kernel.event_listener', event: 'Symfony\Component\Security\Http\Event\LoginSuccessEvent', method: 'onLogin' }
             - { name: 'kernel.event_listener', event: 'Symfony\Component\Security\Http\Event\LogoutEvent', method: 'onLogout' }
 
-    # Register EntityActionListener for Doctrine Events
-    App\EventListener\EntityActionListener:
+    # Register CategoryActionListener for Doctrine Events
+    App\EventListener\CategoryActionListener:
         arguments:
             $activityLogger: '@App\Service\ActivityLogger'
         tags:
             - { name: doctrine.orm.entity_listener }
+
+    # Register StockActionListener for Doctrine Events
+    App\EventListener\StockActionListener:
+        arguments:
+            $activityLogger: '@App\Service\ActivityLogger'
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
+    # Register ProductActionListener for Doctrine Events
+    App\EventListener\ProductActionListener:
+        arguments:
+            $activityLogger: '@App\Service\ActivityLogger'
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
+    # Register UserActionListener for Doctrine Events
+    App\EventListener\UserActionListener:
+        arguments:
+            $activityLogger: '@App\Service\ActivityLogger'
+        tags:
+            - { name: doctrine.orm.entity_listener }
+
+

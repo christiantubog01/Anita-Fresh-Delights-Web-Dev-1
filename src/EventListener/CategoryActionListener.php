@@ -13,7 +13,7 @@ use Doctrine\ORM\Event\PostRemoveEventArgs;
 #[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Category::class)]
 #[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Category::class)]
 #[AsEntityListener(event: Events::postRemove, method: 'postRemove', entity: Category::class)]
-class EntityActionListener
+class CategoryActionListener
 {
     public function __construct(private ActivityLogger $activityLogger) {}
 
