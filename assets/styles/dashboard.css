@@ -79,7 +79,20 @@ h5{
     background-color: #b02a37;
 }
 
+.datetime-wrapper {
+    display: flex;
+    flex-direction: column;
+}
 
+.datetime-date {
+    color: #4c00ff;
+    font-weight: 600;
+}
+
+.datetime-time {
+    color: #000000;
+    font-size: 13px;
+}
 
 
 
