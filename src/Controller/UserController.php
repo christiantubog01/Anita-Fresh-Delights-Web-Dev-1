@@ -25,27 +25,42 @@ final class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user, ['is_edit' => false,]);
-        $form->handleRequest($request);
+public function new(
+    Request $request,
+    UserPasswordHasherInterface $userPasswordHasher,
+    EntityManagerInterface $entityManager
+): Response {
+    $user = new User();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
+    $form = $this->createForm(UserType::class, $user, [
+        'is_edit' => false,
+    ]);
+    $form->handleRequest($request);
 
-            $plainPassword = $form->get('password')->getData();
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-            $entityManager->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
+        // ✅ SET ROLE FROM DROPDOWN
+        $selectedRole = $form->get('role')->getData();
+        $user->setRoles([$selectedRole]);
 
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
+        // ✅ HASH PASSWORD
+        $plainPassword = $form->get('password')->getData();
+        $user->setPassword(
+            $userPasswordHasher->hashPassword($user, $plainPassword)
+        );
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    return $this->render('user/new.html.twig', [
+        'user' => $user,
+        'form' => $form,
+    ]);
+}
+
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
@@ -62,21 +77,26 @@ public function edit(
     User $user,
     EntityManagerInterface $entityManager
 ): Response {
-    $form = $this->createForm(UserType::class, $user, ['is_edit' => true,]);
+    $form = $this->createForm(UserType::class, $user, [
+        'is_edit' => true,
+    ]);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
 
-        // Get plain password field
-        $plainPassword = $form->get('password')->getData();
-
-        // If admin typed a new password → hash it
-        if ($plainPassword) {
-            $hashed = $userPasswordHasher->hashPassword($user, $plainPassword);
-            $user->setPassword($hashed);
+        // ✅ UPDATE ROLE IF CHANGED
+        $selectedRole = $form->get('role')->getData();
+        if ($selectedRole) {
+            $user->setRoles([$selectedRole]);
         }
 
-        // If NOT typed → keep old hashed password (do nothing)
+        // ✅ UPDATE PASSWORD ONLY IF TYPED
+        $plainPassword = $form->get('password')->getData();
+        if ($plainPassword) {
+            $user->setPassword(
+                $userPasswordHasher->hashPassword($user, $plainPassword)
+            );
+        }
 
         $entityManager->flush();
 
@@ -88,6 +108,7 @@ public function edit(
         'form' => $form,
     ]);
 }
+
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
 public function delete(Request $request, User $user, EntityManagerInterface $entityManager, ActivityLogger $activityLogger): Response

@@ -24,7 +24,6 @@ final class DashboardController extends AbstractController
         ActivityLogRepository $activityLogRepo
     ): Response
     {
-        
 
         return $this->render('dashboard/index.html.twig', [
             'productCount' => $productRepo->count([]),

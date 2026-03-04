@@ -14,28 +14,31 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $isEdit = $options['is_edit']; // Custom option
+        $isEdit = $options['is_edit'];
 
-    $passwordOptions = [
-        'mapped' => false,
-        'required' => !$isEdit, // required only when NOT edit (new user)
-        'label' => $isEdit
-            ? 'New Password (leave empty to keep current)'
-            : 'Password',
-    ];
-
+        $passwordOptions = [
+            'mapped' => false,
+            'required' => !$isEdit,
+            'label' => $isEdit
+                ? 'New Password (leave empty to keep current)'
+                : 'Password',
+        ];
 
         $builder
             ->add('username')
-            ->add('roles', ChoiceType::class, [
-    'choices' => [
-        'Admin' => 'ROLE_ADMIN',
-        'Staff' => 'ROLE_STAFF',
-        'User' => 'ROLE_USER',
-    ],
-    'multiple' => true,
-    'expanded' => false, // checkboxes
-])
+
+            // ✅ ROLE DROPDOWN (single role only)
+            ->add('role', ChoiceType::class, [
+                'label' => 'Role',
+                'mapped' => false,
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'Staff' => 'ROLE_STAFF',
+                    'User'  => 'ROLE_USER',
+                ],
+                'placeholder' => 'Select a role',
+                'required' => true,
+            ])
 
             ->add('password', PasswordType::class, $passwordOptions)
             ->add('first_name')
@@ -50,7 +53,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'is_edit' => false, // default value (for NEW)
+            'is_edit' => false,
         ]);
     }
 }

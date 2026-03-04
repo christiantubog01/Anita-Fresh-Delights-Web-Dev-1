@@ -14,12 +14,15 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints as Assert;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Existing fields
+            
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -29,9 +32,44 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             // New fields
-            ->add('first_name')
-            ->add('last_name')
-            ->add('username')
+            ->add('first_name', TextType::class, [
+                'constraints' => [
+                new Assert\NotBlank([
+                'message' => 'First name cannot be blank.',
+            ]),
+                new Assert\Regex([
+                'pattern' => '/^[A-Za-z ]+$/',
+                'message' => 'First name can only contain letters and spaces.',
+            ]),
+                ],
+            ])
+
+            ->add('last_name', TextType::class, [
+                'constraints' => [
+                new Assert\NotBlank([
+                'message' => 'Last name cannot be blank.',
+            ]),
+                new Assert\Regex([
+            'pattern' => '/^[A-Za-z ]+$/',
+            'message' => 'Last name can only contain letters and spaces.',
+            ]),
+                ],
+            ])
+            ->add('username', TextType::class, [
+    'constraints' => [
+        new Assert\NotBlank([
+            'message' => 'Username cannot be blank.',
+        ]),
+        new Assert\Length([
+            'min' => 6,
+            'minMessage' => 'Username must be at least {{ limit }} characters long.',
+        ]),
+        new Assert\Regex([
+            'pattern' => '/^[A-Za-z0-9]+$/',
+            'message' => 'Username can only contain letters and numbers (no spaces or special characters).',
+        ]),
+    ],
+])
             ->add('birth_date', DateType::class, [
                 'widget' => 'single_text',
                 'required' => true,
