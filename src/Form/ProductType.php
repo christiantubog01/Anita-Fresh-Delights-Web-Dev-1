@@ -49,11 +49,11 @@ class ProductType extends AbstractType
             // ->add('date_created')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'category_name',
             ])
             ->add('stock', EntityType::class, [
                 'class' => Stock::class,
-                'choice_label' => 'id',
+                'choice_label' => 'stock_description',
             ])
         ;
     }
