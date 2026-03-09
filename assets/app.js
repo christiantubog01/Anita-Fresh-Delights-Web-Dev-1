@@ -3,6 +3,8 @@ import './styles/app.css';
 import './styles/dashboard.css';
 import './styles/nav-user.css';
 import './styles/home.css';
+import './styles/about.css';
+import './styles/contacts.css';
 
 import DataTable from 'datatables.net-dt';
 
