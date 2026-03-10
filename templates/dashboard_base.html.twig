@@ -67,6 +67,14 @@
                    ⍠ Stocks
                 </a>
             </li>
+            {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item">
+                <a href="{{ path('app_activity_log') }}"
+                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_activity_log' %}active{% endif %}">
+                    [ ]Activity Logs
+                </a>
+            </li>
+            {% endif %}
         </ul>
         
     </div>
