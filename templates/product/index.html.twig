@@ -1,10 +1,10 @@
 {% extends 'dashboard_base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Products{% endblock %}
 
 {% block body %}
 
-    <h1>PRODUCTS</h1>
+    <h1 class="head_title">PRODUCTS</h1>
 
     <table id="myTable" class="display nowrap" style="width:100%">
     <thead>
@@ -39,7 +39,6 @@
                 <td>
     {% if product.category %}
         <div class="category-wrapper">
-            <div class="category-id">{{ product.category.id }}</div>
             <div class="category-name">{{ product.category.categoryName }}</div>
         </div>
     {% else %}
@@ -53,12 +52,13 @@
                     <div class="stock-unit">{{ product.stock.unit }}</div>
                 </div>
                 </td>
-
-                <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
+                <td><span>
+                {{ product.dateCreated|date('F j, Y', 'Asia/Manila') }}
+                </span></td>
 
                 <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-primary">➤ Show</a> 
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">✎ Edit</a>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-sm btn-primary">➤Show</a> 
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">✎Edit</a>
                     {{ include('product/_delete_form.html.twig') }}
                 </td>
             </tr>

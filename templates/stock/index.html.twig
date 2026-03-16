@@ -1,9 +1,9 @@
 {% extends 'dashboard_base.html.twig' %}
 
-{% block title %}Stock index{% endblock %}
+{% block title %}Stocks{% endblock %}
 
 {% block body %}
-<h1>STOCKS</h1>
+<h1 class="head_title">STOCKS</h1>
 
 <table id="myTable" class="display">
     <thead>
@@ -73,7 +73,11 @@
             </div>
             </div>
             </td>
-            <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
+            <td>
+                <span class="datetime-date">
+                    {{ stock.dateCreated ? stock.dateCreated|date('F j, Y', 'Asia/Manila') : '' }}
+                </span>
+            </td>
 
             <td>
                 <a href="{{ path('app_stock_show', {'id': stock.id}) }}"

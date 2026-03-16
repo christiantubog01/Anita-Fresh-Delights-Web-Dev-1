@@ -1,9 +1,9 @@
 {% extends 'dashboard_base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>CATEGORIES</h1>
+    <h1 class="head_title">CATEGORIES</h1>
 
     <table id="myTable" class="display">
         <thead>
@@ -27,7 +27,11 @@
             </div>
             </td>
             <td>{{ category.categoryDescription }}</td>
-            <td>{{ category.dateCreated|date('Y-m-d') }}</td>
+            <td>
+                <span class="datetime-date">
+                    {{ category.dateCreated|date('F j, Y', 'Asia/Manila') }}
+                </span>
+            </td>
             <td>
     <a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-sm btn-primary me-1">➤ Show</a>
     <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-sm btn-secondary me-1">✎ Edit</a>
