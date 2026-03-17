@@ -4,6 +4,45 @@
 
 {% block body %}
 
+<!-- ABOUT SECTION -->
+<section class="about-section">
+    <div class="about-head-container">
+
+        <div class="about-image">
+            <img src="{{ asset('images/about_banner.jpg') }}" alt="About us">
+        </div>
+
+        <div class="about-content">
+            <h1>About Us</h1>
+            <p>
+                Have you ever wondered about the story behind Anita's Fresh Delights? Our journey began with a simple passion for Filipino street food and a desire to share it with our community. We are dedicated to bringing you authentic flavors, made with love and care. Every dish reflects the rich culinary heritage of the Philippines. We invite you to join us on this flavorful adventure and experience the vibrant tastes of our culture.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- TEAM SECTION -->
+<section class="team-section">
+    <div class="team-container">
+
+        <div class="team-content">
+            <h1>Our Team</h1>
+            <p>
+                Our dedicated team is the heart of Anita's Fresh Delights. From preparing ingredients to serving customers, each member plays an important role in delivering quality food and a great dining experience. Their passion, teamwork, and commitment ensure that every visit is enjoyable and memorable.
+            </p>
+        </div>
+
+        <div class="team-image">
+            <img src="{{ asset('images/about_team.jpg') }}" alt="Our Team">
+        </div>
+
+    </div>
+</section>
+
+
+<!-- INFO CARDS -->
 <div class="about-container">
 
     <h1 class="about-title">About Anita's Fresh Delights</h1>
@@ -49,5 +88,48 @@
     </div>
 
 </div>
+
+<!-- MISSION SECTION -->
+<section class="mv-section">
+    <div class="mv-container">
+        <h1>Our Mission</h1>
+        <p>
+            To serve fresh, delicious, and affordable Filipino favorites like lumpia and siomai, made with care and quality ingredients, bringing comfort and delight to every bite.
+        </p>
+    </div>
+</section>
+
+<!-- VISION SECTION -->
+<section class="mv-section alt">
+    <div class="mv-container">
+        <h1>Our Vision</h1>
+        <p>
+            To be a trusted household name in fresh Filipino comfort food, known for authentic flavors, warm service, and a commitment to making every meal a delightful experience, from local streets to every Filipino table.
+        </p>
+    </div>
+</section>
+
+
+<section class="cta-section alt">
+    <div class="cta-container">
+
+        <!-- TEXT -->
+        <div class="cta-content">
+            <h2>Interested in reaching out?</h2>
+
+            <p class="cta-text">
+                We are approachable, easy to reach, and always ready to respond. Whether you have inquiries, feedback, or just want to share your experience, feel free to connect with us. We’d love to hear from you!
+            </p>
+
+            <a href="{{ path('app_contacts') }}#contact-form" class="btn-cta">Join Us</a>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="cta-image">
+            <img src="{{ asset('images/contact_join_us.jpg') }}" alt="Contact us">
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}

@@ -1,34 +1,229 @@
-.contact-page {
-    max-width: 700px;
-    margin: 60px auto;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ------------------------------------------ */
+/* CONTACT PAGE */
+/* ------------------------------------------ */
+
+.contact-section {
+    padding: 80px 10%;
+    background-color: #f8f9fa;
 }
 
 .contact-title {
-    font-size: 2.5rem;
+    text-align: center;
+    font-size: 42px;
     color: #d35400;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .contact-tagline {
-    font-style: italic;
-    margin-bottom: 30px;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #555;
+    font-size: 18px;
 }
 
+/* LAYOUT */
+
+.contact-container {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+/* INFO */
+
 .contact-info {
-    background: #fffbea;
-    border: 2px solid #f0c040;
-    border-radius: 10px;
-    padding: 30px;
+    flex: 1;
 }
 
 .contact-item {
-    margin: 15px 0;
+    margin-bottom: 20px;
 }
 
-.contact-footer {
-    margin-top: 40px;
-    font-size: 14px;
+.contact-item h3 {
+    color: #d35400;
+    margin-bottom: 10px;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-item p {
+    margin: 0;
     color: #555;
+}
+
+/* MAP */
+
+.contact-map {
+    flex: 1;
+}
+
+.contact-map iframe {
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ------------------------------------------ */
+/* CTA SECTIONS */
+/* ------------------------------------------ */
+
+.cta-section {
+    padding: 60px 10%;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.cta-section.alt {
+    background: #ffffff;
+}
+
+.cta-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.cta-text {
+    max-width: 600px;
+    margin: 0 auto 25px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #d35400;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+/* IMAGE */
+.cta-image {
+    padding-top: 15px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-image img {
+    width: 100%;
+    max-width: 700px;   /* control size */
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.btn-cta:hover {
+    background: #b84300;
+}
+
+/* ------------------------------------------ */
+/* CONTACT FORM */
+/* ------------------------------------------ */
+
+.contact-form-section {
+    padding: 80px 10%;
+    background-color: #ffffff;
+}
+
+.contact-form-card {
+    max-width: 800px;
+    margin: auto;
+    background: #eaeaea;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* ROW */
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* FORM GROUP */
+
+.form-group {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* INPUTS */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #d35400;
+}
+
+/* BUTTON */
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #d35400;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #b84300;
+}
+
+/* ------------------------------------------ */
+/* RESPONSIVE */
+/* ------------------------------------------ */
+
+@media (max-width: 768px) {
+
+    .contact-container {
+        flex-direction: column;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .contact-title {
+        font-size: 30px;
+    }
 }

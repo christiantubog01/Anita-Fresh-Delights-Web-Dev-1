@@ -1,5 +1,68 @@
 /* ------------------------------------------ */
-/* ABOUT PAGE */
+/* ABOUT + TEAM SECTIONS */
+/* ------------------------------------------ */
+
+.about-section,
+.team-section {
+    padding: 80px 10%;
+}
+
+.about-section {
+    background-color: #f8f9fa;
+}
+
+.team-section {
+    background-color: #ffffff;
+}
+
+/* FLEX LAYOUT */
+
+.about-head-container,
+.team-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* IMAGE */
+
+.about-image,
+.team-image {
+    flex: 1;
+}
+
+.about-image img,
+.team-image img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* TEXT */
+
+.about-content,
+.team-content {
+    flex: 1;
+}
+
+.about-content h1,
+.team-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about-content p,
+.team-content p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+}
+
+
+/* ------------------------------------------ */
+/* ABOUT CARDS SECTION */
 /* ------------------------------------------ */
 
 .about-container {
@@ -48,4 +111,64 @@
 .about-card h3 {
     color: #d35400;
     margin-bottom: 10px;
+}
+
+
+/* ------------------------------------------ */
+/* RESPONSIVE */
+/* ------------------------------------------ */
+
+@media (max-width: 768px) {
+
+    .about-head-container,
+    .team-container {
+        flex-direction: column;
+    }
+
+    .about-content h1,
+    .team-content h1 {
+        font-size: 32px;
+    }
+}
+
+/* ------------------------------------------ */
+/* MISSION & VISION FULL SECTIONS */
+/* ------------------------------------------ */
+
+.mv-section {
+    padding: 80px 15%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.mv-section.alt {
+    background-color: #f8f9fa; /* alternate background */
+}
+
+.mv-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.mv-section h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #d35400;
+}
+
+.mv-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .mv-section {
+        padding: 60px 20px;
+    }
+
+    .mv-section h1 {
+        font-size: 30px;
+    }
 }
