@@ -119,3 +119,140 @@
 .home-service-box:hover {
     transform: translateY(-5px);
 }
+
+.home-featured {
+    padding: 80px 10%;
+    text-align: center;
+}
+.home-featured h2{
+    font-family: "Gill Sans MT", "Gill Sans", Calibri, sans-serif;
+    font-weight: bold;
+}
+
+.featured-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.featured-card {
+    width: 250px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.featured-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.featured-card h3 {
+    margin: 10px 0;
+    color: #d35400;
+}
+
+.featured-card p {
+    padding: 0 10px 15px;
+    color: #555;
+}
+
+/* ------------------------------------------ */
+/* FAMILY SECTION */
+/* ------------------------------------------ */
+
+.home-family {
+    padding: 80px 10%;
+    background-color: #f8f9fa;
+}
+
+.family-container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+/* IMAGE */
+
+.family-image {
+    flex: 1;
+}
+
+.family-image img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* TEXT */
+
+.family-content {
+    flex: 1;
+}
+
+.family-content h2 {
+    font-size: 36px;
+    color: #d35400;
+    margin-bottom: 15px;
+}
+
+.family-content p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.family-sub {
+    font-weight: 600;
+    color: #333;
+}
+
+/* ------------------------------------------ */
+/* ABOUT CTA SECTION */
+/* ------------------------------------------ */
+
+.home-about-cta {
+    padding: 70px 10%;
+    text-align: center;
+    background: #fff;
+}
+
+.about-cta-content {
+    max-width: 700px;
+    margin: auto;
+}
+
+.home-about-cta h2 {
+    font-size: 32px;
+    color: #d35400;
+    margin-bottom: 15px;
+}
+
+.home-about-cta p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* BUTTON */
+.btn-about {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #d35400;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-about:hover {
+    background: #b84300;
+    transform: translateY(-2px);
+}

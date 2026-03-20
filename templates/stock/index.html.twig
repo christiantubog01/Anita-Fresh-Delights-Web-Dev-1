@@ -29,22 +29,27 @@
 
             {# QUANTITY COLUMN #}
             <td>
-            <div class="qty-wrapper">
-            <div class="stock-qty">
-                {% if isBelowMin %}
-                    <span class="highlight-quantity">
-                        {{ stock.quantity }} (At Minimum Quantity)
-                    </span>
-                {% elseif isAboveMax %}
-                    <span class="highlight-quantity">
-                        {{ stock.quantity }} (At Max Quantity)
-                    </span>
-                {% else %}
-                    {{ stock.quantity }}
-                {% endif %}
-            </div>
-            </div>
-            </td>
+    <div class="qty-wrapper 
+        {% if isBelowMin %}qty-low
+        {% elseif isAboveMax %}qty-high
+        {% else %}qty-normal
+        {% endif %}
+    ">
+        <div class="stock-qty">
+            {% if isBelowMin %}
+                <span>
+                    {{ stock.quantity }} (Min.)
+                </span>
+            {% elseif isAboveMax %}
+                <span>
+                    {{ stock.quantity }} (Max.)
+                </span>
+            {% else %}
+                {{ stock.quantity }}
+            {% endif %}
+        </div>
+    </div>
+</td>
 
             <td>{{ stock.stockDescription }}</td>
 

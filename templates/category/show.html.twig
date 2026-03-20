@@ -3,7 +3,7 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1 class="head_title">SHOW CATEGORY</h1>
 
 <div class="content-box">
     <table class="table">
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>Date Created:</th>
-                <td>{{ category.dateCreated ? category.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ category.dateCreated|date('F j, Y', 'Asia/Manila') }}</td>
             </tr>
         </tbody>
     </table>

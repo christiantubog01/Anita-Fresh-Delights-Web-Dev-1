@@ -3,7 +3,7 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
-<h1>Product</h1>
+<h1 class="head_title">SHOW PRODUCT</h1>
 
 <div class="content-box">
 
@@ -29,13 +29,17 @@
                 <th>Description:</th>
                 <td>{{ product.productDescription }}</td>
             </tr>
+                        <tr>
+                <th>Category:</th>
+                <td>{{ product.category.categoryName }}</td>
+            </tr>
             <tr>
                 <th>Price:</th>
                 <td>₱{{ product.price }}</td>
             </tr>
             <tr>
                 <th>Date Created:</th>
-                <td>{{ product.dateCreated ? product.dateCreated|date('Y-m-d') : '' }}</td>
+                <td>{{ product.dateCreated|date('F j, Y', 'Asia/Manila') }}</td>
             </tr>
         </tbody>
     </table>

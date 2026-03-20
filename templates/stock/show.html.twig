@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <th>Date Created:</th>
-                <td>{{ stock.dateCreated ? stock.dateCreated|date('Y-m-d') : '' }}</td>
+                <td>{{ stock.dateCreated ? stock.dateCreated|date('F j, Y', 'Asia/Manila') : '' }}</td>
             </tr>
         </tbody>
     </table>

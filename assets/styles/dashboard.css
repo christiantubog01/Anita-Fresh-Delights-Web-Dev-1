@@ -220,6 +220,7 @@ h5{
     color:white;
     background-color: #00b012;
     font-family: "Roboto", sans-serif;
+    font-size: 25px;
     font-weight: 600;
     box-shadow: 1px 1px 10px #00000055;
     padding: 15px;
@@ -228,6 +229,13 @@ h5{
 .dt-search {
     align-items: center;
     justify-self: center;
+    padding-bottom: 15px;
+}
+.dt-length{
+    padding-left: 15px;
+}
+.dt-info{
+    padding-left: 15px;
 }
 
 #myTable th,
@@ -269,7 +277,7 @@ h5{
 /* Table rows */
 #myTable td {
     padding: 10px 12px;
-    border-bottom: 1px solid #808080;
+    border-bottom: 1px solid #c8c8c8;
     max-width: 300px;          /* adjust width to your column size */
     white-space: nowrap;        /* keep text on one line */
     overflow: hidden;           /* hide overflowing text */
@@ -297,6 +305,7 @@ h5{
     background-color: #0400ff;
     font-weight: 10px;   
 }
+
 #myTable a.btn-primary:hover {
     background-color: #0300be;
 }
@@ -433,6 +442,10 @@ h5{
     display: flex;
     gap: 10px;
 }
+
+.actions a.btn {
+    border-radius: 15px;
+}
 .content-box {
     opacity: 0;
     transform: translateY(15px);
@@ -457,11 +470,6 @@ h5{
     margin: 30px auto;
     border: 1px solid #d1d1d1;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.edit-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .edit-card h1 {
@@ -496,14 +504,22 @@ h5{
     box-shadow: 0 0 5px rgba(0, 176, 18, 0.4);
 }
 
+.edit-card .btn-primary{
+    border-radius: 15px;
+    background-color: #0300be;
+    border-color: #0400ff;
+    font-weight: 10px;
+    margin-top: 15px;
+}
+
 /* STOCKS QUANTITY */
 .out-of-range {
     color: red;
     font-weight: bold;
 }
 .highlight-quantity {
-    color: red;
     font-weight: bold;
+    color: red;
 }
 
 
@@ -522,19 +538,35 @@ h5{
     padding: 5px;
 }
 
-.qty-wrapper{
+.qty-wrapper {
     color: white;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 .stock-qty{
-    color: white;
-    background-color: rgb(170, 170, 170);
-    border-radius: 15px;
-    padding: 5px;
-    font-weight: bold;
+color: white;
 }
+
+.stock-qty-product{
+    color: black;
+}
+
+/* STATES */
+.qty-low {
+    background-color: red; /* red */
+}
+
+.qty-high {
+    background-color: #f39c12; /* orange */
+}
+
+.qty-normal {
+    background-color: #999999; /* green */
+}
+
 .stock-unit{
     background-color: rgb(0, 77, 116);
     border-radius: 15px;
@@ -577,18 +609,22 @@ h5{
 
 /* Welcome card */
 .dashboard-card.welcome-card {
-    background-color: #ff8800;
+    background-color: #003e2c;
     color: #fff;
     font-size: 22px;
-    font-weight: bold;
-    width: 100%;
+    font-weight: 600px;
+    width: 50%;
+    justify-self: center;
+    font-family: "Roboto", sans-serif;
 }
 
 /* Stats cards */
 .dashboard-card.stat-card h3 {
     font-size: 18px;
+    font-weight: 300px;
     margin-bottom: 10px;
     color: #333;
+    font-family: "Roboto", sans-serif;
 }
 
 .dashboard-card.stat-card p {
@@ -627,9 +663,10 @@ h5{
 
 /* Category title */
 .category-product-card h4 {
+    font-family: "Roboto", sans-serif;
     font-size: 18px;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 300px;
 }
 
 /* Product count number */
