@@ -140,12 +140,12 @@
                             <td>
                                 {% if log.createdAt %}
                                     <div class="datetime-wrapper">
-                                        <span class="datetime-date">
-                                            {{ log.createdAt|date('h:i:s A', 'Asia/Manila') }}              {# Timezone corrected #}                                  
-                                        </span>
-                                        <span class="datetime-time">
-                                            {{ log.createdAt|date('h:i:s A') }}
-                                        </span>
+        <span class="datetime-date">
+            {{ log.createdAt|date('F j, Y', 'Asia/Manila') }}
+        </span>
+        <span class="datetime-time">
+            {{ log.createdAt|date('g:i A', 'Asia/Manila') }}
+        </span>
                                     </div>
                                 {% else %}
                                     —

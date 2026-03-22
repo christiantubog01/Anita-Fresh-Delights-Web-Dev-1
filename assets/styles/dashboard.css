@@ -753,3 +753,22 @@ color: white;
     transform: translate(-50%, -50%) scale(1.05);
 }
 
+/* USER */
+.status {
+    padding: 4px 10px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    min-width: 50px;
+}
+
+/* Verified = green */
+.status.verified {
+    background-color: #28a745; /* Bootstrap green */
+}
+
+/* Unverified = red */
+.status.unverified {
+    background-color: #dc3545; /* Bootstrap red */
+}

@@ -13,6 +13,8 @@
             <th>Role</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Email</th>
+            <th>Verification Status</th>
             <th>Birth Date</th>
             <th>Date & Time Created</th>
             <th>Actions</th>
@@ -45,6 +47,18 @@
             
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
+            <td>
+            {% if user.email is not empty %}
+            {{ user.email }}
+            {% else %}
+            N/A
+            {% endif %}
+            </td>
+            <td>
+            <div class="status {{ user.isVerified ? 'verified' : 'unverified' }}">
+            {{ user.isVerified ? 'Yes' : 'No' }}
+            </div>
+            </td>
             <td>
             <span class="datetime-date" style="color: #555555;">
             {{ user.birthDate ? user.birthDate|date('F j, Y', 'Asia/Manila') }}</td>

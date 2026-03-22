@@ -32,28 +32,27 @@ public function new(
 ): Response {
     $user = new User();
 
-    $form = $this->createForm(UserType::class, $user, [
-        'is_edit' => false,
-    ]);
-    $form->handleRequest($request);
+$form = $this->createForm(UserType::class, $user, [
+    'is_edit' => false,
+]);
+$form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
+if ($form->isSubmitted() && $form->isValid()) {
+    $selectedRole = $form->get('role')->getData();
+    $user->setRoles([$selectedRole]);
 
-        // ✅ SET ROLE FROM DROPDOWN
-        $selectedRole = $form->get('role')->getData();
-        $user->setRoles([$selectedRole]);
-
-        // ✅ HASH PASSWORD
-        $plainPassword = $form->get('password')->getData();
+    $plainPassword = $form->get('password')->getData();
+    if ($plainPassword) {
         $user->setPassword(
             $userPasswordHasher->hashPassword($user, $plainPassword)
         );
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    $entityManager->persist($user);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_user_index');
+}
 
     return $this->render('user/new.html.twig', [
         'user' => $user,
@@ -77,31 +76,38 @@ public function edit(
     User $user,
     EntityManagerInterface $entityManager
 ): Response {
-    $form = $this->createForm(UserType::class, $user, [
-        'is_edit' => true,
-    ]);
-    $form->handleRequest($request);
+$form = $this->createForm(UserType::class, $user, [
+    'is_edit' => true,
+    'user_roles' => $user->getRoles(),
+]);
+$form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-
-        // ✅ UPDATE ROLE IF CHANGED
-        $selectedRole = $form->get('role')->getData();
-        if ($selectedRole) {
-            $user->setRoles([$selectedRole]);
-        }
-
-        // ✅ UPDATE PASSWORD ONLY IF TYPED
-        $plainPassword = $form->get('password')->getData();
-        if ($plainPassword) {
-            $user->setPassword(
-                $userPasswordHasher->hashPassword($user, $plainPassword)
-            );
-        }
-
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_user_index');
+if ($form->isSubmitted() && $form->isValid()) {
+    $selectedRole = $form->get('role')->getData();
+    if ($selectedRole) {
+        $user->setRoles([$selectedRole]);
     }
+
+    $plainPassword = $form->get('password')->getData();
+    if ($plainPassword) {
+        $user->setPassword(
+            $userPasswordHasher->hashPassword($user, $plainPassword)
+        );
+    }
+
+    // Email is only updated if the field is filled
+    $email = $form->get('email')->getData();
+    if ($email) {
+        $user->setEmail($email);
+    }
+
+    $isVerified = $form->get('isVerified')->getData();
+    $user->setIsVerified($isVerified);
+
+    $entityManager->flush();
+
+    return $this->redirectToRoute('app_user_index');
+}
 
     return $this->render('user/edit.html.twig', [
         'user' => $user,
