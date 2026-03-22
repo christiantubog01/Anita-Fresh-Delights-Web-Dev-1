@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\EmailType; 
 
 class RegistrationFormType extends AbstractType
 {
@@ -73,6 +74,14 @@ class RegistrationFormType extends AbstractType
             ->add('birth_date', DateType::class, [
                 'widget' => 'single_text',
                 'required' => true,
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => ['autocomplete' => 'email'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an email',
+                    ]),
+                ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
