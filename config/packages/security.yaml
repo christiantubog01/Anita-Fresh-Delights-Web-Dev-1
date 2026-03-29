@@ -32,7 +32,10 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\LoginAuthenticator
+            custom_authenticator: 
+                - App\Security\LoginAuthenticator       # your existing email/password login
+                - App\Security\GoogleAuthenticator      # the new Google OAuth2 authenticator  
+
             logout:
                 path: app_logout
                 # where to redirect after logout
