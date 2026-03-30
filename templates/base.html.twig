@@ -23,13 +23,12 @@
         {# -------------------------------------- #}
 
 <nav class="home-nav" style="width: 100%;">
-    <div class="home-nav-container" 
-         style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+    <div class="home-nav-container">
 
         <!-- Logo -->
         <div class="home-logo">
             <img src="/images/logo.png" alt="Logo">
-        </div>
+        </div>        
 
         <!-- Menu -->
         <ul style="display: flex; gap: 2em; margin: 0; padding: 0; list-style: none;">
@@ -38,32 +37,9 @@
             <li><a href="{{ path('app_contacts') }}">CONTACTS</a></li>
             <li><a href="{{ path('app_about') }}">ABOUT</a></li>
         </ul>
+        
 
-        <!-- User actions -->
-        <div class="user-actions" style="margin-left: auto; display: flex; gap: 10px;">
-            {% if app.user %}
-                <!-- Logout button -->
-                <a href="{{ path('app_logout') }}" 
-                   class="logout-btn"
-                   style="padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
-                    Logout
-                </a>
-            {% else %}
-                <!-- Login button -->
-                <a href="{{ path('app_login') }}" 
-                   class="login-btn"
-                   style="background:#007bff; padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
-                    Login
-                </a>
-
-                <!-- Register button -->
-                <a href="{{ path('app_register') }}" 
-                   class="register-btn"
-                   style="background:#28a745; padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
-                    Register
-                </a>
-            {% endif %}
-        </div>
+        
 
     </div>
 </nav>
