@@ -14,7 +14,7 @@
 
 .home-banner {
     position: relative;
-    height: 300px;
+    height: 500px;
     overflow: hidden;
     user-select: none;
 }
@@ -48,6 +48,16 @@
     font-size: 16px;
     font-style: italic;
     margin-top: 0.5em;
+}
+
+@media (max-width: 768px) {
+    .home-banner-title {
+        font-size: 2rem;
+    }
+
+    .home-banner-slogan {
+        font-size: 14px;
+    }
 }
 
 /* ------------------------------------------ */
@@ -144,6 +154,19 @@
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
+@media (max-width: 768px) {
+    .featured-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .featured-card {
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
 .featured-card img {
     width: 100%;
     height: 180px;
@@ -210,6 +233,21 @@
 .family-sub {
     font-weight: 600;
     color: #333;
+}
+
+@media (max-width: 768px) {
+    .family-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .family-content h2 {
+        font-size: 28px;
+    }
+
+    .family-content p {
+        font-size: 16px;
+    }
 }
 
 /* ------------------------------------------ */

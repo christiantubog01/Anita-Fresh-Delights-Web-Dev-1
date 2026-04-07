@@ -5,9 +5,11 @@
 {% block body %}
 
 <div class="dashboard-card welcome-card">
-    <h2>
-        Welcome, {{ app.user.firstName ~ " " ~ app.user.lastName }}!
-    </h2>
+    <h1>Dashboard Overview</h1>
+    <h5 style="margin-top:10px;padding:10px;">
+        Welcome back, {{ app.user.firstName ~ " " ~ app.user.lastName }}!
+    </h5>
+    <h6>Here's a quick overview of your store's performance and recent activity.</h6>
 </div>
 
 <div class="dashboard-banner">
@@ -23,6 +25,9 @@
     <!-- ===================== -->
     <!-- Stats Cards -->
     <!-- ===================== -->
+    <h3 style="margin-top:40px; text-align:center;">
+            Total Counts
+    </h3>
     <div class="dashboard-cards-wrapper">
 
         <div class="dashboard-card stat-card products-card">

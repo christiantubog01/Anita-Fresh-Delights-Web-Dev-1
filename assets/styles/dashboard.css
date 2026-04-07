@@ -12,17 +12,19 @@ h5{
 /* Nav bar */
 /* Navbar container */
 .dashboard-admin {
-    background: #00b012; /* dark gray alternative */
-    height: 60px;
+    background: #00b012;
+    height: 30%;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 10px 20px;
     box-shadow: 0px 0px 10px rgb(0, 0, 0);
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
+    flex-wrap: wrap;
 }
+
 
 /* Toggle button */
 .dashboard-admin .toggle-btn {
@@ -598,14 +600,15 @@ color: white;
 /* Base card */
 .dashboard-card {
     background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 15px;
     flex: 1 1 200px;
     min-width: 200px;
     text-align: center;
     opacity: 0;
     animation: fadeIn 0.6s ease forwards;
+    width: 100%;
 }
 
 /* Welcome card */
@@ -614,7 +617,6 @@ color: white;
     color: #fff;
     font-size: 22px;
     font-weight: 600px;
-    width: 50%;
     justify-self: center;
     font-family: "Roboto", sans-serif;
 }
@@ -721,11 +723,11 @@ color: white;
 .dashboard-banner {
     position: relative;
     width: 100%;
-    margin: 20px 0;
-    border-radius: 8px;
+    border-radius: 15px;
     overflow: hidden;
     animation: fadeIn 0.6s ease forwards;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-top: 15px;
 }
 
 .dashboard-banner img {

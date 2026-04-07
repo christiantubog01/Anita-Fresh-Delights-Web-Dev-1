@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
@@ -16,30 +16,35 @@
         
     </head>
 
+
+
     <body class="home-body">
+
 
         {# -------------------------------------- #}
         {# HOME NAVIGATION BAR                   #}
         {# -------------------------------------- #}
 
-<nav class="home-nav" style="width: 100%;">
+<nav class="home-nav">
     <div class="home-nav-container">
 
-        <!-- Logo -->
+        <!-- LOGO -->
         <div class="home-logo">
             <img src="/images/logo.png" alt="Logo">
-        </div>        
+        </div>
 
-        <!-- Menu -->
-        <ul style="display: flex; gap: 2em; margin: 0; padding: 0; list-style: none;">
+        <!-- HAMBURGER -->
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
+        </div>
+
+        <!-- MENU -->
+        <ul id="nav-menu">
             <li><a href="{{ path('app_home') }}">HOME</a></li>
             <li><a href="#">PRODUCTS</a></li>
             <li><a href="{{ path('app_contacts') }}">CONTACTS</a></li>
             <li><a href="{{ path('app_about') }}">ABOUT</a></li>
         </ul>
-        
-
-        
 
     </div>
 </nav>
@@ -75,6 +80,13 @@
                 <p>&copy; 2025 Anita's Fresh Delights | All Rights Reserved</p>
             </div>
         </footer>
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('nav-menu');
 
+    toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+    });
+</script>
     </body>
 </html>
