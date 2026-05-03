@@ -14,14 +14,7 @@
             <p class="home-banner-slogan">Freshly wrapped, lovingly served.</p>
             
             <div class="user-actions" style="margin-top: 20px; padding: 15px; display: flex; gap: 15px; justify-content: center;">
-            {% if app.user %}
-            <!-- Logout button -->
-            <a href="{{ path('app_logout') }}" 
-               class="logout-btn"
-               style="padding:8px 14px; color:#fff; border-radius:4px; text-decoration:none;">
-                Logout
-            </a>
-            {% else %}
+            {% if not app.user %}
             <!-- Login button -->
             <a href="{{ path('app_login') }}" 
                class="login-btn"

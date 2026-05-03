@@ -172,3 +172,54 @@
         font-size: 30px;
     }
 }
+
+.meet-team-section {
+    padding: 60px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.meet-team-container h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+/* GRID */
+.meet-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.meet-team-card {
+    background: #fff8f0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.meet-team-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ROUND IMAGE */
+.meet-team-card img {
+    display: block;        /* 🔥 makes margin auto work */
+    margin: 0 auto;        /* centers horizontally */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.meet-team-card h3 {
+    margin: 10px 0 5px;
+}
+
+.meet-team-card p {
+    color: #777;
+    font-size: 0.9rem;
+}

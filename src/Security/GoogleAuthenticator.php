@@ -61,7 +61,7 @@ class GoogleAuthenticator extends AbstractAuthenticator
                     }
                     $user->setUsername($username);
 
-                    $user->setRoles(['ROLE_USER']);
+                    $user->setRoles(['ROLE_STAFF']);
                     $user->setPassword(''); // no password for OAuth
                     $user->setIsVerified(true);
 
@@ -83,7 +83,7 @@ class GoogleAuthenticator extends AbstractAuthenticator
     public function onAuthenticationSuccess(Request $request, $token, string $firewallName): ?RedirectResponse
     {
         // Redirect after successful login
-        return new RedirectResponse('/home'); // change to your home route
+        return new RedirectResponse('/dashboard'); // change to your home route
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?RedirectResponse

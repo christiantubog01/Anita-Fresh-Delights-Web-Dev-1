@@ -5,6 +5,7 @@ import './styles/nav-user.css';
 import './styles/home.css';
 import './styles/about.css';
 import './styles/contacts.css';
+import './styles/all_products.css';
 
 import DataTable from 'datatables.net-dt';
 
