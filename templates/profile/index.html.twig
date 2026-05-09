@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+
+
+<section class="profile-section">
+    <div class="profile-container">
+
+        <div class="profile-card">
+
+            {# FLASH MESSAGES #}
+            {% for message in app.flashes('error') %}
+                <p style="color: red; text-align:center;">{{ message }}</p>
+            {% endfor %}
+
+            {% for message in app.flashes('success') %}
+                <p style="color: green; text-align:center;">{{ message }}</p>
+            {% endfor %}
+
+            {# HEADER #}
+            <div class="profile-header">
+
+                <img 
+                    src="{{ asset('uploads/profile/' ~ (user.profilePicture ?: 'default.png')) }}" 
+                    class="profile-img"
+                >
+
+                <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+                <p class="username">@{{ user.username }}</p>
+
+            </div>
+
+            {# FORM #}
+            <form method="POST" enctype="multipart/form-data" class="profile-form">
+
+                <label>Username</label>
+                <input type="text" name="username" value="{{ user.username }}">
+
+                <label>Profile Picture</label>
+                <input type="file" name="profile_picture">
+
+                <div class="form-row">
+                    <div>
+                        <label>First Name</label>
+                        <input type="text" name="first_name" value="{{ user.firstName }}">
+                    </div>
+
+                    <div>
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" value="{{ user.lastName }}">
+                    </div>
+                </div>
+
+                <label>Birth Date</label>
+                <input type="date" name="birth_date"
+                       value="{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}">
+
+                <label>New Password</label>
+                <input type="password" name="new_password" placeholder="Leave blank to keep current">
+
+                <button type="submit">Save Changes</button>
+
+            </form>
+
+            {# LOGOUT #}
+            <a href="{{ path('app_logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
