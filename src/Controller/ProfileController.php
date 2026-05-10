@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\ActivityLogger;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +20,8 @@ class ProfileController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        ActivityLogger $activityLogger
     ): Response {
 
         /** @var User $user */
@@ -30,43 +33,97 @@ class ProfileController extends AbstractController
 
         if ($request->isMethod('POST')) {
 
-            // 🔹 USERNAME (NEW)
+            $changes = [];
+
+            // =========================
+            // USERNAME
+            // =========================
             $newUsername = $request->request->get('username');
 
             if ($newUsername && $newUsername !== $user->getUsername()) {
 
-                $existing = $userRepository->findOneBy(['username' => $newUsername]);
+                $existing = $userRepository->findOneBy([
+                    'username' => $newUsername
+                ]);
 
                 if ($existing) {
+
                     $this->addFlash('error', 'Username already taken.');
+
                 } else {
+
+                    $changes[] = "Username changed from '{$user->getUsername()}' to '{$newUsername}'";
+
                     $user->setUsername($newUsername);
                 }
             }
 
-            // 1. FIRST NAME
-            $user->setFirstName($request->request->get('first_name'));
+            // =========================
+            // FIRST NAME
+            // =========================
+            $firstName = $request->request->get('first_name');
 
-            // 2. LAST NAME
-            $user->setLastName($request->request->get('last_name'));
+            if ($firstName !== $user->getFirstName()) {
 
-            // 3. BIRTH DATE
+                $changes[] = "First name updated";
+
+                $user->setFirstName($firstName);
+            }
+
+            // =========================
+            // LAST NAME
+            // =========================
+            $lastName = $request->request->get('last_name');
+
+            if ($lastName !== $user->getLastName()) {
+
+                $changes[] = "Last name updated";
+
+                $user->setLastName($lastName);
+            }
+
+            // =========================
+            // BIRTH DATE
+            // =========================
             $birthDate = $request->request->get('birth_date');
+
             if ($birthDate) {
-                $user->setBirthDate(new \DateTime($birthDate));
+
+                $newBirthDate = new \DateTime($birthDate);
+
+                if (
+                    !$user->getBirthDate() ||
+                    $user->getBirthDate()->format('Y-m-d') !== $newBirthDate->format('Y-m-d')
+                ) {
+
+                    $changes[] = "Birth date updated";
+
+                    $user->setBirthDate($newBirthDate);
+                }
             }
 
-            // 4. PASSWORD
+            // =========================
+            // PASSWORD
+            // =========================
             $newPassword = $request->request->get('new_password');
+
             if (!empty($newPassword)) {
+
                 $hashed = $passwordHasher->hashPassword($user, $newPassword);
+
                 $user->setPassword($hashed);
+
+                $changes[] = "Password changed";
             }
 
-            // 5. PROFILE PICTURE
+            // =========================
+            // PROFILE PICTURE
+            // =========================
             $file = $request->files->get('profile_picture');
+
             if ($file) {
-                $filename = uniqid().'.'.$file->guessExtension();
+
+                $filename = uniqid() . '.' . $file->guessExtension();
 
                 $file->move(
                     $this->getParameter('kernel.project_dir') . '/public/uploads/profile',
@@ -74,9 +131,25 @@ class ProfileController extends AbstractController
                 );
 
                 $user->setProfilePicture($filename);
+
+                $changes[] = "Profile picture updated";
             }
 
+            // =========================
+            // SAVE
+            // =========================
             $em->flush();
+
+            // =========================
+            // ACTIVITY LOG
+            // =========================
+            if (!empty($changes)) {
+
+                $activityLogger->log(
+                    "UPDATE",
+                    "User profile updated by {$user->getUsername()} | " . implode(', ', $changes)
+                );
+            }
 
             $this->addFlash('success', 'Profile updated successfully!');
         }

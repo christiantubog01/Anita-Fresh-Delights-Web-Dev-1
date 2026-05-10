@@ -13,6 +13,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
 {
@@ -34,6 +36,22 @@ class UserType extends AbstractType
                     new NotBlank(['message' => 'Username cannot be blank']),
                 ],
             ])
+            ->add('profile_picture', FileType::class, [
+                'label' => 'Profile Picture',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+            new File([
+                'maxSize' => '5M',
+                'mimeTypes' => [
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+            ],
+            'mimeTypesMessage' => 'Please upload a valid image',
+        ])
+    ],
+])
             ->add('role', ChoiceType::class, [
                 'label' => 'Role',
                 'mapped' => false,

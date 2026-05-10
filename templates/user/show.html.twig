@@ -8,6 +8,14 @@
     <table class="table">
         <tbody>
             <tr>
+                <th>Profile Picture</th>
+                <td><img 
+                src="{{ asset('uploads/profile/' ~ (user.profilePicture ?: 'default.png')) }}"
+                class="profile-img"
+                onerror="this.onerror=null;this.src='{{ asset('uploads/profile/default.png') }}';">
+                </td>
+            </tr>
+            <tr>
                 <th>ID</th>
                 <td>{{ user.id }}</td>
             </tr>
@@ -17,11 +25,25 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
+                <td>
+    {% for role in user.roles %}
+        {% if role == 'ROLE_ADMIN' %}
+            <span style="background:red; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                ADMIN
+            </span>
+
+        {% elseif role == 'ROLE_STAFF' %}
+            <span style="background:purple; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                STAFF
+            </span>
+
+        {% elseif role == 'ROLE_USER' %}
+            <span style="background:blue; color:white; padding:3px 6px; border-radius:4px; font-size:12px; display:inline-block; margin-bottom:2px;">
+                USER
+            </span>
+        {% endif %}
+    {% endfor %}
+            </td>
             </tr>
             <tr>
                 <th>First Name</th>
@@ -33,11 +55,21 @@
             </tr>
             <tr>
                 <th>Birth Date</th>
-                <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
+                <td><span class="datetime-date" style="color: #555555;">
+                    {{ user.birthDate ? user.birthDate|date('F j, Y', 'Asia/Manila') }}</td>
+                    </span>
+                </td>
             </tr>
             <tr>
                 <th>Date & Time Created</th>
-                <td>{{ user.dateTimeCreated ? user.dateTimeCreated|date('Y-m-d H:i:s') : '' }}</td>
+                <td><div class="datetime-wrapper">
+                    <span class="datetime-date">
+                    {{ user.dateTimeCreated|date('F j, Y', 'Asia/Manila') }}
+                    </span>
+                    <span class="datetime-time">
+                    {{ user.dateTimeCreated|date('g:i A', 'Asia/Manila') }}
+                    </span>
+            </div></td>
             </tr>
         </tbody>
     </table>

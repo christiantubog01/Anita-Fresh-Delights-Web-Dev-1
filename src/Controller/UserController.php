@@ -46,6 +46,19 @@ if ($form->isSubmitted() && $form->isValid()) {
         $user->setPassword(
             $userPasswordHasher->hashPassword($user, $plainPassword)
         );
+    }   
+    $profilePicture = $form->get('profile_picture')->getData();
+
+    if ($profilePicture) {
+
+    $filename = uniqid() . '.' . $profilePicture->guessExtension();
+
+    $profilePicture->move(
+        $this->getParameter('kernel.project_dir') . '/public/uploads/profile',
+        $filename
+    );
+
+    $user->setProfilePicture($filename);
     }
 
     $entityManager->persist($user);
@@ -83,6 +96,19 @@ $form = $this->createForm(UserType::class, $user, [
 $form->handleRequest($request);
 
 if ($form->isSubmitted() && $form->isValid()) {
+    $profilePicture = $form->get('profile_picture')->getData();
+
+    if ($profilePicture) {
+
+    $filename = uniqid() . '.' . $profilePicture->guessExtension();
+
+    $profilePicture->move(
+        $this->getParameter('kernel.project_dir') . '/public/uploads/profile',
+        $filename
+    );
+
+    $user->setProfilePicture($filename);
+    }
     $selectedRole = $form->get('role')->getData();
     if ($selectedRole) {
         $user->setRoles([$selectedRole]);

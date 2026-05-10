@@ -23,10 +23,11 @@
             {# HEADER #}
             <div class="profile-header">
 
-                <img 
-                    src="{{ asset('uploads/profile/' ~ (user.profilePicture ?: 'default.png')) }}" 
-                    class="profile-img"
-                >
+            <img 
+            src="{{ asset('uploads/profile/' ~ (user.profilePicture ?: 'default.png')) }}"
+            class="profile-img"
+            onerror="this.onerror=null;this.src='{{ asset('uploads/profile/default.png') }}';"
+            >
 
                 <h2>{{ user.firstName }} {{ user.lastName }}</h2>
                 <p class="username">@{{ user.username }}</p>
