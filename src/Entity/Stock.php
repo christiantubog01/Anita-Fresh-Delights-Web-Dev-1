@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\StockRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use ApiPlatform\Metadata\ApiResource;
@@ -32,22 +31,22 @@ class Stock
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private ?string $quantity = null;
+    #[ORM\Column]
+    private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
     private ?string $stock_description = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private ?string $min_quantity = null;
+    #[ORM\Column]
+    private ?int $min_quantity = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
-    private ?string $max_quantity = null;
+    #[ORM\Column]
+    private ?int $max_quantity = null;
 
     #[ORM\Column(length: 20)]
     private ?string $unit = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: 'date')]
     private ?\DateTime $date_created = null;
 
     /**
@@ -56,17 +55,23 @@ class Stock
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'stock')]
     private Collection $products;
 
+    public function __construct()
+    {
+        $this->date_created = new \DateTime();
+        $this->products = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getQuantity(): ?string
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
 
-    public function setQuantity(string $quantity): static
+    public function setQuantity(int $quantity): static
     {
         $this->quantity = $quantity;
 
@@ -85,24 +90,24 @@ class Stock
         return $this;
     }
 
-    public function getMinQuantity(): ?string
+    public function getMinQuantity(): ?int
     {
         return $this->min_quantity;
     }
 
-    public function setMinQuantity(string $min_quantity): static
+    public function setMinQuantity(int $min_quantity): static
     {
         $this->min_quantity = $min_quantity;
 
         return $this;
     }
 
-    public function getMaxQuantity(): ?string
+    public function getMaxQuantity(): ?int
     {
         return $this->max_quantity;
     }
 
-    public function setMaxQuantity(string $max_quantity): static
+    public function setMaxQuantity(int $max_quantity): static
     {
         $this->max_quantity = $max_quantity;
 
@@ -133,13 +138,6 @@ class Stock
         return $this;
     }
 
-    // added for date
-    public function __construct()
-    {
-        $this->date_created = new \DateTime();
-        $this->products = new ArrayCollection();
-    }
-
     /**
      * @return Collection<int, Product>
      */
@@ -161,7 +159,7 @@ class Stock
     public function removeProduct(Product $product): static
     {
         if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
+
             if ($product->getStock() === $this) {
                 $product->setStock(null);
             }

@@ -12,19 +12,35 @@
             {% for product in products %}
                 <div class="product-card">
 
-                    <img src="{{ asset('products/' ~ product.image) }}" alt="{{ product.productName }}">
+    <img src="{{ asset('products/' ~ product.image) }}"
+         alt="{{ product.productName }}">
 
-                    <h3>{{ product.productName }}</h3>
+    <h3>{{ product.productName }}</h3>
 
-                    <p class="category">
-                    {{ product.category ? product.category.categoryName : 'No Category' }}
-                    </p>
+    <p class="category">
+        {{ product.category ? product.category.categoryName : 'No Category' }}
+    </p>
 
-                    <p class="price">
-                        ₱ {{ product.price }}
-                    </p>
+    <p class="price">
+        ₱ {{ product.price }}
+    </p>
 
-                </div>
+    <form method="post"
+          action="{{ path('app_cart_add', {id: product.id}) }}">
+
+        <input type="number"
+               name="quantity"
+               value="1"
+               min="1"
+               class="form-control mb-2">
+
+        <button type="submit" class="btn btn-primary">
+            Add to Cart
+        </button>
+
+    </form>
+
+</div>
             {% else %}
                 <p>No products found.</p>
             {% endfor %}

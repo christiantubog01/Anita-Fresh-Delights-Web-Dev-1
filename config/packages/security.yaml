@@ -55,6 +55,7 @@ security:
         - { path: ^/product, roles: [ROLE_ADMIN,ROLE_STAFF] }
         - { path: ^/category, roles: [ROLE_ADMIN,ROLE_STAFF] }
         - { path: ^/stock, roles: [ROLE_ADMIN,ROLE_STAFF] }
+        - { path: ^/dashboard/orders, roles: [ROLE_ADMIN,ROLE_STAFF] }
         - { path: ^/user, roles: [ROLE_ADMIN] }
         - { path: ^/activity/log, roles: [ROLE_ADMIN] }
         - { path: ^/api/register, roles: PUBLIC_ACCESS }

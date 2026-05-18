@@ -1,0 +1,190 @@
+{% extends 'dashboard_base.html.twig' %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block body %}
+
+<h1 class="head_title">
+    ORDER DETAILS
+</h1>
+
+{% for message in app.flashes('success') %}
+
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+
+{% endfor %}
+
+<div class="order-details-card">
+
+    <div class="details-grid">
+
+        <div>
+            <strong>Order ID:</strong>
+            #{{ order.id }}
+        </div>
+
+        <div>
+            <strong>Customer:</strong>
+            {{ order.user.username }}
+        </div>
+
+        <div>
+            <strong>Status:</strong>
+
+            <span class="
+                {% if order.status == 'Pending' %}
+                    badge bg-warning
+                {% elseif order.status == 'Processing' %}
+                    badge bg-info
+                {% elseif order.status == 'Completed' %}
+                    badge bg-success
+                {% elseif order.status == 'Cancelled' %}
+                    badge bg-danger
+                {% endif %}
+            ">
+                {{ order.status }}
+            </span>
+
+        </div>
+
+        <div>
+            <strong>Date:</strong>
+            {{ order.createdAt|date('F j, Y h:i A', 'Asia/Manila') }}
+        </div>
+
+    </div>
+
+</div>
+
+<div class="status-buttons mt-4">
+
+    <a
+        href="{{ path('app_dashboard_order_status', {
+            id: order.id,
+            status: 'Pending'
+        }) }}"
+        class="btn btn-warning"
+    >
+        Pending
+    </a>
+
+    <a
+        href="{{ path('app_dashboard_order_status', {
+            id: order.id,
+            status: 'Processing'
+        }) }}"
+        class="btn btn-info"
+    >
+        Processing
+    </a>
+
+    <a
+        href="{{ path('app_dashboard_order_status', {
+            id: order.id,
+            status: 'Completed'
+        }) }}"
+        class="btn btn-success"
+    >
+        Completed
+    </a>
+
+    <a
+        href="{{ path('app_dashboard_order_status', {
+            id: order.id,
+            status: 'Cancelled'
+        }) }}"
+        class="btn btn-danger"
+    >
+        Cancelled
+    </a>
+
+</div>
+
+<h2 class="mt-5 mb-3">
+    Ordered Products
+</h2>
+
+<table id="myTable" class="display nowrap" style="width:100%">
+
+    <thead>
+
+        <tr>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for item in order.orderItems %}
+
+            <tr>
+
+                <td>
+                    {{ item.product.productName }}
+                </td>
+
+                <td>
+
+                    {% if item.product.image %}
+
+                        <img
+                            src="{{ asset('products/' ~ item.product.image) }}"
+                            class="product-thumb"
+                            alt=""
+                        >
+
+                    {% else %}
+
+                        No image
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+                    ₱{{ item.price }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td>
+                    ₱{{ item.subtotal }}
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<div class="mt-4">
+
+    <h3>
+        Total: ₱{{ order.total }}
+    </h3>
+
+</div>
+
+<div class="mt-4">
+
+    <a
+        href="{{ path('app_dashboard_orders_index') }}"
+        class="btn btn-secondary"
+    >
+        ← Back
+    </a>
+
+</div>
+
+{% endblock %}

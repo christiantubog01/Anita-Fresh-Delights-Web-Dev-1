@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Details{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Order #{{ order.id }}
+    </h1>
+
+    <div class="mb-4">
+
+        <h5>Status:
+            <span class="badge bg-primary">
+                {{ order.status }}
+            </span>
+        </h5>
+
+        <h5>
+            Date:
+            {{ order.createdAt|date('F d, Y h:i A') }}
+        </h5>
+
+    </div>
+
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for item in order.orderItems %}
+
+                <tr>
+
+                    <td>
+                        {{ item.product.productName }}
+                    </td>
+
+                    <td>
+                        ₱ {{ item.price }}
+                    </td>
+
+                    <td>
+                        {{ item.quantity }}
+                    </td>
+
+                    <td>
+                        ₱ {{ item.subtotal }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="text-end mt-4">
+
+        <h3>
+            Total: ₱ {{ order.total }}
+        </h3>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -34,7 +34,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a href="{{ path('app_dashboard') }}"
-                   class="nav-link {% if app.request.attributes.get('_route') starts with 'app_dashboard' %}active{% endif %}">
+                   class="nav-link {% if app.request.attributes.get('_route') == 'app_dashboard' %}active{% endif %}">
                     🏠︎ Dashboard
                 </a>
             </li>
@@ -65,6 +65,12 @@
                 <a href="{{ path('app_stock_index') }}"
                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_stock' %}active{% endif %}">
                    ⍠ Stocks
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('app_dashboard_orders_index') }}"
+                    class="nav-link {% if app.request.attributes.get('_route') starts with 'app_dashboard_order' %}active{% endif %}">
+                    ➩ Orders
                 </a>
             </li>
             {% if is_granted("ROLE_ADMIN") %}
