@@ -4,117 +4,117 @@
 
 {% block body %}
 
-<div class="container mt-5">
+<section class="cart-section">
 
-    <h1 class="mb-4">Shopping Cart</h1>
+    <div class="cart-container">
 
-    {# FLASH MESSAGES #}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+        <h1 class="cart-title">
+            Shopping Cart
+        </h1>
 
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
+        {# FLASH MESSAGES #}
+        {% for message in app.flashes('success') %}
+            <div class="cart-alert success">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-    {% if cartItems is empty %}
+        {% for message in app.flashes('error') %}
+            <div class="cart-alert error">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-        <div class="alert alert-info">
-            Your cart is empty.
-        </div>
+        {% if cartItems is empty %}
 
-    {% else %}
+            <div class="empty-cart">
 
-        <table class="table table-bordered align-middle">
+                <h3>Your cart is empty.</h3>
 
-            <thead class="table-dark">
-                <tr>
-                    <th>Image</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+                <a
+                    href="{{ path('app_all_products') }}"
+                    class="shop-btn"
+                >
+                    Continue Shopping
+                </a>
 
-            <tbody>
+            </div>
+
+        {% else %}
+
+            <div class="cart-items">
 
                 {% for item in cartItems %}
 
-                    <tr>
+                    <div class="cart-card">
 
-                        <td width="120">
+                        <div class="cart-image">
 
                             <img
                                 src="{{ asset('products/' ~ item.product.image) }}"
                                 alt="{{ item.product.productName }}"
-                                width="100"
-                                class="img-fluid rounded"
                             >
 
-                        </td>
+                        </div>
 
-                        <td>
-                            {{ item.product.productName }}
-                        </td>
+                        <div class="cart-details">
 
-                        <td>
-                            ₱ {{ item.product.price }}
-                        </td>
+                            <h3>
+                                {{ item.product.productName }}
+                            </h3>
 
-                        <td>
-                            {{ item.quantity }}
-                        </td>
+                            <p class="cart-price">
+                                ₱ {{ item.product.price }}
+                            </p>
 
-                        <td>
-                            ₱ {{ item.subtotal }}
-                        </td>
+                            <p>
+                                Quantity:
+                                <strong>{{ item.quantity }}</strong>
+                            </p>
 
-                        <td>
+                            <p class="cart-subtotal">
+                                Subtotal:
+                                ₱ {{ item.subtotal }}
+                            </p>
+
+                        </div>
+
+                        <div class="cart-actions">
 
                             <a
                                 href="{{ path('app_cart_remove', {id: item.product.id}) }}"
-                                class="btn btn-danger btn-sm"
+                                class="remove-btn"
                             >
-
                                 Remove
-
                             </a>
 
-                        </td>
+                        </div>
 
-                    </tr>
+                    </div>
 
                 {% endfor %}
 
-            </tbody>
+            </div>
 
-        </table>
+            <div class="cart-summary">
 
-        <div class="text-end mt-4">
+                <h2>
+                    Total: ₱ {{ total }}
+                </h2>
 
-            <h3 class="mb-3">
-                Total: ₱ {{ total }}
-            </h3>
+                <a
+                    href="{{ path('app_cart_checkout') }}"
+                    class="checkout-btn"
+                >
+                    Checkout
+                </a>
 
-            <a
-                href="{{ path('app_cart_checkout') }}"
-                class="btn btn-success btn-lg"
-            >
+            </div>
 
-                Checkout
+        {% endif %}
 
-            </a>
+    </div>
 
-        </div>
-
-    {% endif %}
-
-</div>
+</section>
 
 {% endblock %}

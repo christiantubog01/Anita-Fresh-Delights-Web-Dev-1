@@ -4,78 +4,102 @@
 
 {% block body %}
 
-<div class="container mt-5">
+<section class="order-details-section">
 
-    <h1 class="mb-4">
-        Order #{{ order.id }}
-    </h1>
+    <div class="order-details-container">
 
-    <div class="mb-4">
+        <div class="order-header">
 
-        <h5>Status:
-            <span class="badge bg-primary">
-                {{ order.status }}
-            </span>
-        </h5>
+            <div>
+                <h1 class="order-details-title">
+                    Order #{{ order.id }}
+                </h1>
 
-        <h5>
-            Date:
-            {{ order.createdAt|date('F d, Y h:i A') }}
-        </h5>
+                <p class="order-date">
+                    {{ order.createdAt|date('F d, Y h:i A') }}
+                </p>
+            </div>
 
-    </div>
+            <div>
+                <span class="order-status 
+                    {{ order.status|lower }}">
+                    {{ order.status }}
+                </span>
+            </div>
 
-    <table class="table table-bordered">
+        </div>
 
-        <thead class="table-dark">
-
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
+        <div class="order-items-wrapper">
 
             {% for item in order.orderItems %}
 
-                <tr>
+                <div class="order-item-card">
 
-                    <td>
-                        {{ item.product.productName }}
-                    </td>
+                    <div class="order-item-left">
 
-                    <td>
-                        ₱ {{ item.price }}
-                    </td>
+                        <img
+                            src="{{ asset('products/' ~ item.product.image) }}"
+                            alt="{{ item.product.productName }}"
+                            class="order-item-image"
+                        >
 
-                    <td>
-                        {{ item.quantity }}
-                    </td>
+                    </div>
 
-                    <td>
-                        ₱ {{ item.subtotal }}
-                    </td>
+                    <div class="order-item-center">
 
-                </tr>
+                        <h3>
+                            {{ item.product.productName }}
+                        </h3>
+
+                        <p class="item-price">
+                            Price: ₱ {{ item.price }}
+                        </p>
+
+                        <p class="item-qty">
+                            Quantity: {{ item.quantity }}
+                        </p>
+
+                    </div>
+
+                    <div class="order-item-right">
+
+                        <p class="item-subtotal-label">
+                            Subtotal
+                        </p>
+
+                        <h4>
+                            ₱ {{ item.subtotal }}
+                        </h4>
+
+                    </div>
+
+                </div>
 
             {% endfor %}
 
-        </tbody>
+        </div>
 
-    </table>
+        <div class="order-total-box">
 
-    <div class="text-end mt-4">
+            <h2>
+                Total: ₱ {{ order.total }}
+            </h2>
 
-        <h3>
-            Total: ₱ {{ order.total }}
-        </h3>
+        </div>
+
+        <div class="order-actions">
+
+            <a
+                href="{{ path('app_my_orders') }}"
+                class="back-orders-btn"
+            >
+                Back to Orders
+            </a>
+
+        </div>
 
     </div>
 
-</div>
+</section>
 
 {% endblock %}

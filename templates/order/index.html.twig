@@ -4,77 +4,98 @@
 
 {% block body %}
 
-<div class="container mt-5">
+<section class="orders-section">
 
-    <h1 class="mb-4">My Orders</h1>
+    <div class="orders-container">
 
-    {% if orders is empty %}
+        <h1 class="orders-title">
+            My Orders
+        </h1>
 
-        <div class="alert alert-info">
-            No orders found.
-        </div>
+        {% if orders is empty %}
 
-    {% else %}
+            <div class="empty-orders">
 
-        <table class="table table-bordered">
+                <h3>No orders found.</h3>
 
-            <thead class="table-dark">
+                <a
+                    href="{{ path('app_all_products') }}"
+                    class="shop-btn"
+                >
+                    Start Shopping
+                </a>
 
-                <tr>
-                    <th>Order ID</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                    <th>View</th>
-                </tr>
+            </div>
 
-            </thead>
+        {% else %}
 
-            <tbody>
+            <div class="orders-grid">
 
                 {% for order in orders %}
 
-                    <tr>
+                    <div class="order-card">
 
-                        <td>
-                            #{{ order.id }}
-                        </td>
+                        <div class="order-top">
 
-                        <td>
-                            ₱ {{ order.total }}
-                        </td>
+                            <h3>
+                                Order #{{ order.id }}
+                            </h3>
 
-                        <td>
-                            {{ order.status }}
-                        </td>
+<span class="
+    order-status
 
-                        <td>
-                            {{ order.createdAt|date('F d, Y h:i A') }}
-                        </td>
+    {% if order.status == 'Pending' %}
+        pending
+    {% elseif order.status == 'Processing' %}
+        processing
+    {% elseif order.status == 'Completed' %}
+        completed
+    {% elseif order.status == 'Cancelled' %}
+        cancelled
+    {% endif %}
+">
 
-                        <td>
+    {{ order.status }}
+
+</span>
+
+                        </div>
+
+                        <div class="order-body">
+
+                            <p>
+                                <strong>Total:</strong>
+                                ₱ {{ order.total }}
+                            </p>
+
+                            <p>
+                                <strong>Date:</strong>
+                                {{ order.createdAt|date('F d, Y h:i A') }}
+                            </p>
+
+                        </div>
+
+                        <div class="order-footer">
 
                             <a
                                 href="{{ path('app_order_show', {id: order.id}) }}"
-                                class="btn btn-primary btn-sm"
+                                class="view-order-btn"
                             >
-
-                                View
-
+                                View Order
                             </a>
 
-                        </td>
+                        </div>
 
-                    </tr>
+                    </div>
 
                 {% endfor %}
 
-            </tbody>
+            </div>
 
-        </table>
+        {% endif %}
 
-    {% endif %}
+    </div>
 
-</div>
+</section>
 
 {% endblock %}
