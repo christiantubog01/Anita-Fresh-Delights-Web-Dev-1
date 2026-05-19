@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OrderRepository;
+use App\Entity\User;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,12 +12,16 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class OrderController extends AbstractController
 {
-    #[IsGranted('ROLE_USER')]
     #[Route('/my-orders', name: 'app_my_orders')]
     public function index(
         OrderRepository $orderRepository
     ): Response {
+        
+        $user = $this->getUser();
+        if (!$user->isVerified()) {
 
+        return $this->redirectToRoute('app_verify_notice');
+    }
         $orders = $orderRepository->findBy(
             ['user' => $this->getUser()],
             ['created_at' => 'DESC']

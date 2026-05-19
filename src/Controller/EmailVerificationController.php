@@ -33,4 +33,9 @@ class EmailVerificationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
+    #[Route('/verify/notice', name: 'app_verify_notice')]
+public function verifyNotice(): Response
+{
+    return $this->render('emails/verification.html.twig');
+}
 }

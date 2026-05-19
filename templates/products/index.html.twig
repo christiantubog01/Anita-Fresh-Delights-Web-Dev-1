@@ -24,7 +24,7 @@
     <p class="price">
         ₱ {{ product.price }}
     </p>
-        {% if app.user %}
+        {% if app.user and app.user.isVerified %}
     <form method="post"
           action="{{ path('app_cart_add', {id: product.id}) }}">
 

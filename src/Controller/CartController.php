@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\User;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Repository\ProductRepository;
@@ -21,8 +22,15 @@ final class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(
         SessionInterface $session,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
     ): Response {
+
+        $user = $this->getUser();
+        if (!$user->isVerified()) {
+
+
+        return $this->redirectToRoute('app_verify_notice');
+    }
 
         $cart = $session->get('cart', []);
 
