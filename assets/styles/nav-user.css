@@ -15,7 +15,10 @@ body {
     font-size: 16px;
 }
 
+/* ------------------------------------------ */
 /* NAVIGATION BAR */
+/* ------------------------------------------ */
+
 .home-nav {
     background-color: #95b808;
     padding: 0.5em 0;
@@ -24,31 +27,37 @@ body {
 }
 
 /* NAV CONTAINER */
+
 .home-nav-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* FIXED */
+    justify-content: space-between;
     gap: 2em;
     padding: 0 2em;
     flex-wrap: wrap;
 }
 
 /* LOGO */
+
 .home-logo img {
     height: 50px;
     width: auto;
 }
 
 /* MENU */
+
 .home-nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+
     display: flex;
+    align-items: center;
     gap: 2em;
 }
 
 /* REMOVE inline display */
+
 .home-nav li {
     list-style: none;
 }
@@ -61,20 +70,28 @@ body {
     padding: 0.5em 1em;
     transition: background 0.2s;
     border-radius: 4px;
+
+    white-space: nowrap;
 }
 
 .home-nav a:hover { 
     background: #444;
 }
 
+/* ------------------------------------------ */
 /* IMAGES FIX */
+/* ------------------------------------------ */
+
 img {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
+/* ------------------------------------------ */
 /* FOOTER */
+/* ------------------------------------------ */
+
 .home-footer {
     background: #d5d5d5;
     color: #000;
@@ -87,6 +104,7 @@ img {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 30px;
+
     max-width: 1200px;
     margin: auto;
 }
@@ -95,7 +113,10 @@ img {
     flex: 1 1 300px;
 }
 
+/* ------------------------------------------ */
 /* HAMBURGER BUTTON */
+/* ------------------------------------------ */
+
 .menu-toggle {
     display: none;
     font-size: 28px;
@@ -103,8 +124,11 @@ img {
     color: white;
 }
 
-/* MOBILE MODE */
-@media (max-width: 768px) {
+/* ------------------------------------------ */
+/* COLLAPSE NAVBAR AT 1440px */
+/* ------------------------------------------ */
+
+@media (max-width: 1440px) {
 
     .menu-toggle {
         display: block;
@@ -113,25 +137,39 @@ img {
     .home-nav-container {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 
     /* HIDE MENU BY DEFAULT */
+
     .home-nav ul {
         display: none;
+
         flex-direction: column;
         width: 100%;
+
         background: #95b808;
+
         margin-top: 10px;
+        padding: 10px 0;
+
+        gap: 0;
     }
 
     /* SHOW MENU WHEN ACTIVE */
+
     .home-nav ul.active {
         display: flex;
     }
 
     .home-nav ul li {
         text-align: center;
-        padding: 10px 0;
+        width: 100%;
+    }
+
+    .home-nav a {
+        display: block;
+        width: 100%;
+        padding: 14px 0;
     }
 }
-
