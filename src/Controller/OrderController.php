@@ -18,10 +18,17 @@ final class OrderController extends AbstractController
     ): Response {
         
         $user = $this->getUser();
-        if (!$user->isVerified()) {
 
-        return $this->redirectToRoute('app_verify_notice');
-    }
+        // If there is no logged in user, redirect to login
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // If the user exists but is not verified, redirect to the verification notice
+        if (method_exists($user, 'isVerified') && !$user->isVerified()) {
+            return $this->redirectToRoute('app_verify_notice');
+        }
+
         $orders = $orderRepository->findBy(
             ['user' => $this->getUser()],
             ['created_at' => 'DESC']
@@ -31,7 +38,7 @@ final class OrderController extends AbstractController
             'orders' => $orders
         ]);
     }
-    #[IsGranted('ROLE_USER')]
+
 #[Route('/my-orders/{id}', name: 'app_order_show')]
 public function show(
     \App\Entity\Order $order

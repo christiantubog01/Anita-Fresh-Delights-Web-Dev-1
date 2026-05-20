@@ -24,13 +24,17 @@ final class CartController extends AbstractController
         SessionInterface $session,
         ProductRepository $productRepository,
     ): Response {
-
         $user = $this->getUser();
-        if (!$user->isVerified()) {
 
+        // If there is no logged in user, redirect to login
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
 
-        return $this->redirectToRoute('app_verify_notice');
-    }
+        // If the user exists but is not verified, redirect to the verification notice
+        if (method_exists($user, 'isVerified') && !$user->isVerified()) {
+            return $this->redirectToRoute('app_verify_notice');
+        }
 
         $cart = $session->get('cart', []);
 
@@ -91,7 +95,7 @@ final class CartController extends AbstractController
 
         $session->set('cart', $cart);
 
-        $this->addFlash('success', 'Product added to cart.');
+        $this->addFlash('success', $quantity . 'x ' . $product->getProductName() . ' added to cart.');
 
         return $this->redirectToRoute('app_all_products');
     }
@@ -113,7 +117,6 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
-    #[IsGranted('ROLE_USER')]
     #[Route('/cart/checkout', name: 'app_cart_checkout')]
     public function checkout(
         SessionInterface $session,

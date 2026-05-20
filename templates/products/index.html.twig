@@ -7,7 +7,19 @@
 <section class="products-section">
     <div class="products-container">
         <h1>Our Products</h1>
+{# FLASH MESSAGES #}
+        {% for message in app.flashes('success') %}
+            <div class="cart-alert success">
+                {{ message }}
+            </div>
+        {% endfor %}
 
+        {% for message in app.flashes('error') %}
+            <div class="cart-alert error">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
         <div class="products-grid">
             {% for product in products %}
                 <div class="product-card">

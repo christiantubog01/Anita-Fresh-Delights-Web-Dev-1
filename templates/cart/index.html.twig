@@ -11,8 +11,7 @@
         <h1 class="cart-title">
             Shopping Cart
         </h1>
-
-        {# FLASH MESSAGES #}
+{# FLASH MESSAGES #}
         {% for message in app.flashes('success') %}
             <div class="cart-alert success">
                 {{ message }}
@@ -24,6 +23,7 @@
                 {{ message }}
             </div>
         {% endfor %}
+        
 
         {% if cartItems is empty %}
 
