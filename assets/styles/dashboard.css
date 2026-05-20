@@ -119,6 +119,7 @@ h5{
 }
 
 #sidebar .sidebar-logo {
+    margin-top: 25px;
     justify-self: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     background-color: white;
