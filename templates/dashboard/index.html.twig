@@ -12,6 +12,7 @@
     <h6>Here's a quick overview of your store's performance and recent activity.</h6>
 </div>
 
+
 <div class="dashboard-banner">
     <a href="{{ path('app_home') }}">
         <img src="{{ asset('images/filipino-food-banner.jpg') }}" 
@@ -21,7 +22,10 @@
 </div>
 
 <div id="dashboard-content">
-
+    <div class="dashboard-card stat-card revenue-card">
+    <h3>Total Revenue</h3>
+    <p>₱ {{ totalRevenue }}</p>
+</div>
     <!-- ===================== -->
     <!-- Stats Cards -->
     <!-- ===================== -->

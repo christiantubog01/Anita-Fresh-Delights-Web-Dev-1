@@ -777,3 +777,40 @@ color: white;
 .status.unverified {
     background-color: #dc3545; /* Bootstrap red */
 }
+
+/* Revenue Card */
+.revenue-card {
+    background: linear-gradient(135deg, #00b012, #008f0f);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.revenue-card h3 {
+    color: white !important;
+    font-weight: 600;
+}
+
+.revenue-card p {
+    color: white !important;
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Optional glow effect */
+.revenue-card::before {
+    content: "₱";
+    position: absolute;
+    right: 15px;
+    bottom: -10px;
+    font-size: 80px;
+    opacity: 0.1;
+    font-weight: bold;
+}
+
+/* Hover */
+.revenue-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 176, 18, 0.3);
+}
