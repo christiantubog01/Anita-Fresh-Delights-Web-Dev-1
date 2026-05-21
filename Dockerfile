@@ -25,7 +25,6 @@ RUN if [ ! -f /app/.env ]; then echo "APP_ENV=${APP_ENV:-prod}\nAPP_DEBUG=${APP_
 
 # Now run post-install scripts after app code is available
 RUN composer install --no-interaction --optimize-autoloader --no-ansi || true
-RUN php bin/console importmap:install --no-interaction
 
 RUN php bin/console cache:warmup --env=prod --no-debug || true
 
