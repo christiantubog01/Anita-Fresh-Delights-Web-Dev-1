@@ -30,6 +30,8 @@ RUN npm install
 
 RUN npm run build
 
+RUN php bin/console lexik:jwt:generate-keypair --skip-if-exists || true
+
 RUN php bin/console cache:warmup --env=prod --no-debug || true
 
 FROM php:8.3-fpm as runtime
