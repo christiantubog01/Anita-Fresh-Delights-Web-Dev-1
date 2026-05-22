@@ -14,6 +14,8 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
 
+use App\State\OrderProcessor;
+
 use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -24,7 +26,9 @@ use Symfony\Component\Serializer\Attribute\Groups;
     operations: [
         new GetCollection(),
         new Get(),
-        new Post(),
+        new Post(
+    processor: OrderProcessor::class
+),
         new Put(),
         new Delete()
     ]
@@ -41,7 +45,7 @@ class Order
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['order:read', 'order:write'])]
+    #[Groups(['order:read'])]
     private ?User $user = null;
 
     #[ORM\Column]
