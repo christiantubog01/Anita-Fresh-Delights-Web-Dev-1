@@ -62,6 +62,9 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/google-login, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: PUBLIC_ACCESS }
+        - { path: ^/api/product, roles: PUBLIC_ACCESS }
+        - { path: ^/api/stock, roles: PUBLIC_ACCESS }
+        - { path: ^/api/category, roles: PUBLIC_ACCESS }
 
 
 when@test:
