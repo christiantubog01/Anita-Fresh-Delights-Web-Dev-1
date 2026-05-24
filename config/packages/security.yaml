@@ -60,7 +60,8 @@ security:
         - { path: ^/activity/log, roles: [ROLE_ADMIN] }
         - { path: ^/api/register, roles: PUBLIC_ACCESS }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api, roles: IS_AUTHENTICATED }
+        - { path: ^/api/google-login, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: PUBLIC_ACCESS }
 
 
 when@test:
