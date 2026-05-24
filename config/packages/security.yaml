@@ -61,10 +61,8 @@ security:
         - { path: ^/api/register, roles: PUBLIC_ACCESS }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/google-login, roles: PUBLIC_ACCESS }
-        - { path: ^/api, roles: PUBLIC_ACCESS }
-        - { path: ^/api/products, roles: PUBLIC_ACCESS }
-        - { path: ^/api/stocks, roles: PUBLIC_ACCESS }
-        - { path: ^/api/categories, roles: PUBLIC_ACCESS }
+
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
 
 
 when@test:
