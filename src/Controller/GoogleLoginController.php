@@ -23,6 +23,7 @@ class GoogleLoginController extends AbstractController
         try {
 
             $data = json_decode($request->getContent(), true);
+
             $idToken = $data['idToken'] ?? null;
 
             if (!$idToken) {
@@ -62,37 +63,54 @@ class GoogleLoginController extends AbstractController
             }
 
             $user = $em->getRepository(User::class)
-                ->findOneBy(['email' => $email]);
+                ->findOneBy([
+                    'email' => $email
+                ]);
 
             // CREATE USER IF NOT EXISTS
             if (!$user) {
+
                 $user = new User();
 
                 $user->setEmail($email);
                 $user->setFirstName($firstName);
                 $user->setLastName($lastName);
 
-                // IMPORTANT: still needed for your current schema
+                // IMPORTANT
                 $user->setUsername($email);
 
                 $user->setRoles(['ROLE_USER']);
+
                 $user->setIsVerified(true);
 
-                // required fields
+                // REQUIRED FIELDS
                 $user->setPassword('');
-                $user->setBirthDate(new \DateTime('2000-01-01'));
+
+                $user->setBirthDate(
+                    new \DateTime('2000-01-01')
+                );
 
                 $em->persist($user);
                 $em->flush();
             }
 
-            // 🔥 SAFETY: ensure user is fully managed by Doctrine
+            // REFRESH ENTITY
             $em->refresh($user);
 
             return $this->json([
-                'user' => $user->getUserIdentifier(),
-                'roles' => $user->getRoles(),
+
                 'token' => $jwtManager->create($user),
+
+                'user' => [
+                    'username' => $user->getUsername(),
+                    'email' => $user->getEmail(),
+                    'roles' => $user->getRoles(),
+                    'verified' => $user->isVerified(),
+
+                    // OPTIONAL
+                    'firstName' => $user->getFirstName(),
+                    'lastName' => $user->getLastName(),
+                ]
             ]);
 
         } catch (\Throwable $e) {
