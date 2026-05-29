@@ -102,6 +102,7 @@ class GoogleLoginController extends AbstractController
                 'token' => $jwtManager->create($user),
 
                 'user' => [
+                    'id' => $user->getId(),
                     'username' => $user->getUsername(),
                     'email' => $user->getEmail(),
                     'roles' => $user->getRoles(),
