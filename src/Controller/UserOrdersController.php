@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\SocketService;
 
 final class UserOrdersController extends AbstractController
 {
@@ -32,7 +33,8 @@ final class UserOrdersController extends AbstractController
     public function updateStatus(
         Order $order,
         string $status,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        SocketService $socketService
     ): Response
     {
         $allowedStatuses = [
@@ -49,6 +51,11 @@ final class UserOrdersController extends AbstractController
         $order->setStatus($status);
 
         $entityManager->flush();
+        
+        $socketService->emitOrderUpdate(
+        $order->getId(),
+        $status
+        );
 
         $this->addFlash(
             'success',
